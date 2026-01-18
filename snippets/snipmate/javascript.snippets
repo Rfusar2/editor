@@ -1,0 +1,63 @@
+snippet kta-form
+    class myForm {
+        constructor(type){
+            this.type = type
+        }
+        public get(name){
+            if(this.type == "control"){
+                return Forms.SDK.GetFormControlValue(name)
+            }
+            else if(this.type == "variable"){
+                return Forms.SDK.GetFormVariableValue(name)
+            }
+            else{ return new Error(`type = [control, variable] not ${this.type}`) }
+        }
+        public set(name, value){
+            if(this.type == "control"){
+                return Forms.SDK.UpdateFormControlValue(name, value)
+            }
+            else if(this.type == "variable"){
+                return Forms.SDK.UpdateFormVariableValue(name, value)
+            }
+            else{ return new Error(`type = [control, variable] not ${this.type}`) }
+        }
+    }
+snippet download-file
+    function downloadFile({
+        filename, 
+        content,
+        contentType
+    }) {
+        const blob = new Blob([content], { type: contentType }); // Cambia il tipo se necessario
+        const url = URL.createObjectURL(blob); // Crea un URL per il blob
+    
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename; // Assegna il nome del file
+    
+        document.body.appendChild(a);
+        a.click(); 
+        document.body.removeChild(a);
+    
+        URL.revokeObjectURL(url);
+    }
+snippet utils
+    function Create({tag, style = {}, props = {}, event=null}) {
+        const element = document.createElement(tag)
+        Object.assign(element.style, style)
+        for (let key in props) {
+            if (key === "class") { props[key].forEach(className => element.classList.add(className)) } 
+            else { Object.assign(element, props) }
+        }
+        if(event){element.addEventListener(event["type"], event["func"])}
+        return element
+    }
+snippet class
+    class MyClass {
+        constructor(){
+
+        }
+        m1(){}
+        m1(){}
+        m1(){}
+    }

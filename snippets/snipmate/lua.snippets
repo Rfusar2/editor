@@ -1,0 +1,14 @@
+snippet class
+    local Obj = {}
+    Obj.__index = Obj
+    
+    --constructor
+    function Obj:new(arg) 
+        return setmetatable({
+            arg = arg
+    
+    
+        }, self)
+    end
+    
+    function Obj:method1() end

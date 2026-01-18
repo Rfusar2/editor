@@ -1,0 +1,8 @@
+require("core.const")
+require("core.packer")
+require("core.remap")
+require("core.info")
+require("core.ricordi")
+require("core.plugin")
+require("core.debugger")
+require("core.lsp_server")

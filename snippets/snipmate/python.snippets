@@ -1,0 +1,43 @@
+snippet type
+    from dataclasses import dataclass
+    from typing import Literal
+    
+    @dataclass
+    class Investment:
+        start: int
+        tasse: Literal["STATO", "PRIVATO"]
+        
+        def __post_init__(self):
+            errorDescription = "oggetto non valido"
+            
+            if not all(isinstance(v, str) for v in (self.isin, self.scadenza, self.ultima_cedola)):
+                raise TypeError(errorDescription)
+    
+            if not all(isinstance(v, float) for v in (
+                self.tasso_lordo,
+                self.valore_nominale,
+                self.prezzo,
+                self.costi_di_gestione,
+                self.start_con_cambio_valuta,
+            )):
+                raise TypeError(errorDescription)
+    
+            if not isinstance(self.valore_nominale_euro, bool):
+                raise TypeError(errorDescription)
+snippet cmd
+    from argparse import ArgumentParser
+    
+    cmd = ArgumentParser(
+        prog="<name_tool>",
+        description="",
+    )
+    
+    cmd.add_argument(
+            "-","--",
+            choices=[],
+            action="",
+            help="",
+            required=False
+    )
+    
+    args = cmd.parse_args()

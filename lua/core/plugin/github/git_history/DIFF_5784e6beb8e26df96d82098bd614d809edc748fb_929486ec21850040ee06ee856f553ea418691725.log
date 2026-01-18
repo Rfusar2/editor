@@ -1,0 +1,2012 @@
+[1mdiff --git a/README.md b/README.md[m
+[1mindex 84d3d07..5557ace 100644[m
+[1m--- a/README.md[m
+[1m+++ b/README.md[m
+[36m@@ -63,3 +63,9 @@[m [mto use live_grep with telescopes[m
+ -- WINDOWS[m
+ choco install ripgrep[m
+ ```    [m
+[32m+[m
+[32m+[m[32mfor updating nvim use[m
+[32m+[m[32m```lua[m
+[32m+[m[32m-- WINDOWS[m
+[32m+[m[32mchoco upgrade nvim[m
+[32m+[m[32m```[m[41m    [m
+[1mdiff --git a/lua/core/help.lua b/doc/custom_config_menu.txt[m
+[1msimilarity index 59%[m
+[1mrename from lua/core/help.lua[m
+[1mrename to doc/custom_config_menu.txt[m
+[1mindex 1547e7d..c3c9637 100644[m
+[1m--- a/lua/core/help.lua[m
+[1m+++ b/doc/custom_config_menu.txt[m
+[36m@@ -1,18 +1,6 @@[m
+[31m-function MenuHelp()[m
+[31m-    local b = vim.api.nvim_create_buf(false, true)[m
+[31m-    local win = vim.api.nvim_open_win(b, true, {[m
+[31m-      relative = 'win',[m
+[31m-      width = 70,[m
+[31m-      height = 60,[m
+[31m-      row = 10,[m
+[31m-      col = 15,[m
+[31m-      style = 'minimal',[m
+[31m-      border = 'single',[m
+[31m-      title = "|  Menu Help  |",[m
+[31m-      title_pos = "right",[m
+[31m-    })[m
+[31m-[m
+[31m-    local menu = [[[m
+[32m+[m[32m==========================================================================================[m
+[32m+[m[32m*custom_config_menu.txt*[m
+[32m+[m
+      # NVIM Basic[m
+ [m
+      Leader + pu            | PackerUpdate[m
+[36m@@ -106,43 +94,3 @@[m [mfunction MenuHelp()[m
+      F10                   | Next Move[m
+      F11                   | Next Step[m
+      F12                   | ???[m
+[31m-    ]][m
+[31m-[m
+[31m-    -- Imposta le linee nel buffer[m
+[31m-    local lines = vim.fn.split(menu, "\n")[m
+[31m-    vim.api.nvim_buf_set_lines(b, 0, -1, false, lines)[m
+[31m-[m
+[31m-    -- Definisci gli highlight groups[m
+[31m-    vim.api.nvim_set_hl(0, 'MenuHelpSection', { fg = '#FF9E64', bold = true })  -- Colore arancione per le sezioni[m
+[31m-    vim.api.nvim_set_hl(0, 'MenuHelpCommand', { fg = '#7EE787' })               -- Colore verde per i comandi[m
+[31m-    vim.api.nvim_set_hl(0, 'MenuHelpKey', { fg = '#79C0FF' })                   -- Colore blu per i tasti[m
+[31m-[m
+[31m-    -- Applica gli highlight alle linee[m
+[31m-    for i, line in ipairs(lines) do[m
+[31m-        -- Se la linea inizia con '#', applica l'highlight della sezione[m
+[31m-        if line:match('%s+#') then[m
+[31m-            vim.api.nvim_buf_add_highlight(b, -1, 'MenuHelpSection', i-1, 0, -1)[m
+[31m-        end[m
+[31m-[m
+[31m-        -- Highlight per i tasti (prima parte prima del |)[m
+[31m-        local key_part = line:match('^(.-|)')[m
+[31m-        if key_part then[m
+[31m-            vim.api.nvim_buf_add_highlight(b, -1, 'MenuHelpKey', i-1, 0, #key_part)[m
+[31m-        end[m
+[31m-[m
+[31m-        -- Highlight per i comandi (dopo il |)[m
+[31m-        local cmd_part = line:match('|(.*)$')[m
+[31m-        if cmd_part then[m
+[31m-            vim.api.nvim_buf_add_highlight(b, -1, 'MenuHelpCommand', i-1, line:find('|') or 0, -1)[m
+[31m-        end[m
+[31m-    end[m
+[31m-[m
+[31m-    -- Imposta il filetype per eventuale syntax highlighting aggiuntivo[m
+[31m-    vim.api.nvim_buf_set_option(b, 'filetype', 'help')[m
+[31m-[m
+[31m-    -- Chiudi la finestra quando si preme q[m
+[31m-    vim.api.nvim_buf_set_keymap(b, 'n', 'q', ':q<CR>', { noremap = true, silent = true })[m
+[31m-    vim.api.nvim_buf_set_keymap(b, 'n', '<ESC>', ':q<CR>', { noremap = true, silent = true })[m
+[31m-end[m
+[31m-[m
+[31m-vim.keymap.set('n', '<leader>help', ':lua MenuHelp()<CR>', {})[m
+[1mdiff --git a/doc/help_manual_custom.txt b/doc/help_manual_custom.txt[m
+[1mindex 4f5f69a..432c91b 100644[m
+[1m--- a/doc/help_manual_custom.txt[m
+[1m+++ b/doc/help_manual_custom.txt[m
+[36m@@ -1,12 +1,15 @@[m
+ ==========================================================================================[m
+[31m-*help_manual_custom.txt*[m
+[32m+[m[32m*help_manual_custom_1.txt*[m
+[32m+[m
+[32m+[m[32m:helptags doc                                       for updating[m
+[32m+[m
+ [m
+ vim.g        for const on editor[m
+ [m
+ local OS = vim.loop.os_uname().sysname[m
+ [m
+ ==========================================================================================[m
+[31m-*folders*    Git[m
+[32m+[m[32m*folders*[m[41m    [m
+ [m
+     zf                         create A folder's file[m
+ [m
+[36m@@ -19,6 +22,7 @@[m [mlocal OS = vim.loop.os_uname().sysname[m
+ ==========================================================================================[m
+ *GitDocs.txt*    Git[m
+ [m
+[32m+[m
+     git log -2                         return last two commits[m
+     git log --grep="example"           for searching into a comment area of the commit[m
+     git log --pretty-format="%H"       for filtering the return value of log action[m
+[1mdiff --git a/doc/help_manual_custom_2.txt b/doc/help_manual_custom_2.txt[m
+[1mnew file mode 100644[m
+[1mindex 0000000..7f8c94e[m
+[1m--- /dev/null[m
+[1m+++ b/doc/help_manual_custom_2.txt[m
+[36m@@ -0,0 +1,54 @@[m
+[32m+[m[32m==========================================================================================[m
+[32m+[m[32m*help_manuale_custom_2.txt*[m
+[32m+[m
+[32m+[m[32mtake a look to lua\core\info.lua[m
+[32m+[m
+[32m+[m
+[32m+[m[32m==========================================================================================[m
+[32m+[m[32m*custom_snippets*[m
+[32m+[m
+[32m+[m[32mcustom_snippets[m
+[32m+[m
+[32m+[m[32mfiletype[m
+[32m+[m
+[32m+[m[32m    cs:[m
+[32m+[m[32m        - kta-main[m
+[32m+[m[32m        - kta-debug[m
+[32m+[m[32m        - kta-parser[m
+[32m+[m
+[32m+[m[32m    javascript:[m
+[32m+[m[32m        - kta-form[m
+[32m+[m[32m        - download-file[m
+[32m+[m[32m        - utils[m
+[32m+[m[32m        - class[m
+[32m+[m
+[32m+[m[32m    html:[m
+[32m+[m[32m        - html[m
+[32m+[m
+[32m+[m[32m    python:[m
+[32m+[m[32m        - type[m
+[32m+[m[32m        - cmd[m
+[32m+[m
+[32m+[m[32m    css:[m
+[32m+[m[32m        - animations[m
+[32m+[m
+[32m+[m[32m    lua:[m
+[32m+[m[32m        - class[m
+[32m+[m
+[32m+[m[32m==========================================================================================[m
+[32m+[m[32m*script with class*[m
+[32m+[m
+[32m+[m[32mlocal Obj = {}[m
+[32m+[m[32mObj.__index = Obj[m
+[32m+[m
+[32m+[m[32m--constructor[m
+[32m+[m[32mfunction Obj:new(arg)[m[41m [m
+[32m+[m[32m    return setmetatable({[m
+[32m+[m[32m        arg = arg[m
+[32m+[m
+[32m+[m
+[32m+[m[32m    }, self)[m
+[32m+[m[32mend[m
+[32m+[m
+[32m+[m[32mfunction Obj:method1() end[m
+[32m+[m
+[1mdiff --git a/doc/tags b/doc/tags[m
+[1mindex 00f31cd..461850f 100644[m
+[1m--- a/doc/tags[m
+[1m+++ b/doc/tags[m
+[36m@@ -1,6 +1,8 @@[m
+ GitDocs.txt	help_manual_custom.txt	/*GitDocs.txt*[m
+[31m-createnextjs.txt	help_manual_custom.txt	/*createnextjs.txt*[m
+ custom-powershell.txt	help_manual_custom.txt	/*custom-powershell.txt*[m
+[32m+[m[32mcustom_config_menu.txt	custom_config_menu.txt	/*custom_config_menu.txt*[m
+[32m+[m[32mcustom_snippets	help_manual_custom_2.txt	/*custom_snippets*[m
+ folders	help_manual_custom.txt	/*folders*[m
+[31m-help_manual_custom.txt	help_manual_custom.txt	/*help_manual_custom.txt*[m
+[31m-tagsxml.txt	help_manual_custom.txt	/*tagsxml.txt*[m
+[32m+[m[32mhelp_manual_custom_1.txt	help_manual_custom.txt	/*help_manual_custom_1.txt*[m
+[32m+[m[32mhelp_manuale_custom_2.txt	help_manual_custom_2.txt	/*help_manuale_custom_2.txt*[m
+[32m+[m[32mmenu-nvim-custom.txt	help_manual_custom.txt	/*menu-nvim-custom.txt*[m
+[1mdiff --git a/file.py b/file.py[m
+[1mnew file mode 100644[m
+[1mindex 0000000..e69de29[m
+[1mdiff --git a/init.lua b/init.lua[m
+[1mindex 267d999..2101769 100644[m
+[1m--- a/init.lua[m
+[1m+++ b/init.lua[m
+[36m@@ -1,9 +1,8 @@[m
+ require("core.const")[m
+ require("core.packer")[m
+ require("core.remap")[m
+[31m-require("core.help")[m
+[32m+[m[32mrequire("core.info")[m
+ require("core.ricordi")[m
+ require("core.plugin")[m
+ require("core.debugger")[m
+ require("core.lsp_server")[m
+[31m-require("core.dependecies")[m
+[1mdiff --git a/lua/core/const.lua b/lua/core/const.lua[m
+[1mindex a30ad1f..0167fbd 100644[m
+[1m--- a/lua/core/const.lua[m
+[1m+++ b/lua/core/const.lua[m
+[36m@@ -1,8 +1,27 @@[m
+[31m-vim.g.home = vim.fn.stdpath('config')[m
+[32m+[m[32mlocal MY_GLOBAL_VARS = {}[m
+[32m+[m[32mMY_GLOBAL_VARS.__index = MY_GLOBAL_VARS[m
+ [m
+[31m-vim.g.OS = vim.loop.os_uname().sysname[m
+[32m+[m[32m--constructor[m
+[32m+[m[32mfunction MY_GLOBAL_VARS:new(arg)[m[41m [m
+[32m+[m[32m    return setmetatable({[m
+[32m+[m[32m        home = vim.fn.stdpath('config'),[m
+[32m+[m[32m        log = vim.fn.stdpath('log'),[m
+[32m+[m[32m        data = vim.fn.stdpath('data'),[m
+[32m+[m[32m        isWindows = vim.loop.os_uname().sysname == "Windows_NT",[m
+[32m+[m[32m        isLinux = vim.loop.os_uname().sysname == "Linux",[m
+ [m
+[31m-function vim.g.open_url(url)[m
+[32m+[m[32m    }, self)[m
+[32m+[m[32mend[m
+[32m+[m
+[32m+[m
+[32m+[m[32m--vim.g.home = vim.fn.stdpath('config')[m
+[32m+[m[32m--vim.g.log = vim.fn.stdpath('log')[m
+[32m+[m[32m--vim.g.data = vim.fn.stdpath('data')[m
+[32m+[m[32m--vim.g.isWindows = vim.loop.os_uname().sysname == "Windows_NT"[m
+[32m+[m[32m--vim.g.isLinux = vim.loop.os_uname().sysname == "Linux"[m
+[32m+[m
+[32m+[m[32m--* open_url[m
+[32m+[m[32mfunction MY_GLOBAL_VARS:open_url(url)[m
+     local cmd[m
+     if vim.fn.has("mac") == 1 then cmd = { "open", url }[m
+     elseif vim.fn.has("unix") == 1 then cmd = { "xdg-open", url }[m
+[36m@@ -11,3 +30,16 @@[m [mfunction vim.g.open_url(url)[m
+     if cmd then vim.fn.jobstart(cmd, { detach = true })[m
+     end[m
+ end[m
+[32m+[m
+[32m+[m[32m--* restart_nvim[m
+[32m+[m[32mfunction MY_GLOBAL_VARS:restart_nvim()[m
+[32m+[m[32m    vim.cmd("wa")  -- salva tutti i file[m
+[32m+[m[32m    local current = vim.api.nvim_buf_get_name(0)[m
+[32m+[m[32m    vim.cmd("quitall!")[m
+[32m+[m[32m    vim.fn.jobstart({ "nvim", current }, { detach = true })[m
+[32m+[m[32mend[m
+[32m+[m
+[32m+[m
+[32m+[m[32mfunction MY_GLOBAL_VARS:log(obj) print(vim.inspect(obj)) end[m
+[32m+[m
+[32m+[m[32m_G.my_global_vars = MY_GLOBAL_VARS:new()[m
+[1mdiff --git a/lua/core/debugger/init.lua b/lua/core/debugger/init.lua[m
+[1mindex 6eb397e..3497a10 100644[m
+[1m--- a/lua/core/debugger/init.lua[m
+[1m+++ b/lua/core/debugger/init.lua[m
+[36m@@ -1,5 +1,5 @@[m
+ local dapui = require("core.debugger.dap-ui")[m
+[31m-local dap = require("core.debugger.dap")[m
+[32m+[m[32mlocal dap = require("core.debugger.python")[m
+ [m
+ dapui.InitDapUi()[m
+ dap.InitDap()[m
+[1mdiff --git a/lua/core/debugger/dap.lua b/lua/core/debugger/python.lua[m
+[1msimilarity index 63%[m
+[1mrename from lua/core/debugger/dap.lua[m
+[1mrename to lua/core/debugger/python.lua[m
+[1mindex 2885596..bfe449b 100644[m
+[1m--- a/lua/core/debugger/dap.lua[m
+[1m+++ b/lua/core/debugger/python.lua[m
+[36m@@ -1,26 +1,19 @@[m
+ local M = {}[m
+ local dap = require('dap')[m
+[31m-local log = require("core.plugin.notify")[m
+[32m+[m[32mlocal log = require("core.notify")[m
+ [m
+ local function get_python_path()[m
+[31m-    local is_windows = vim.fn.has('win32') == 1[m
+[31m-    local venv_path[m
+[32m+[m[32m    local venv_path = my_global_vars.isWindows and '/venv/Scripts/python.exe' or '/venv/bin/python3'[m
+[32m+[m[32m    local venv_path_log = my_global_vars.isWindows and "Sono su windows ed è presente il venv" or "Sono su Unix-like ed'è presente il venv"[m
+[32m+[m[41m    [m
+[32m+[m[32m    local VENV = vim.fn.getcwd()..venv_path[m
+ [m
+[31m-    if is_windows then[m
+[31m-        venv_path = vim.fn.getcwd() .. '/venv/Scripts/python.exe'[m
+[31m-        if vim.fn.executable(venv_path) == 1 then[m
+[31m-            log.log("Sono su windows ed'è presente il venv", "info", {})[m
+[31m-            return venv_path[m
+[31m-        end[m
+[31m-    else[m
+[31m-        venv_path = vim.fn.getcwd() .. '/venv/bin/python3'[m
+[31m-        if vim.fn.executable(venv_path) == 1 then[m
+[31m-            log.log("Sono su Unix-like ed'è presente il venv", "info", {})[m
+[31m-            return venv_path[m
+[31m-        end[m
+[32m+[m[32m    if vim.fn.executable(VENV) == 1 then[m
+[32m+[m[32m        log.log(venv_path_log, "info", {})[m
+[32m+[m[32m        return venv_path[m
+     end[m
+     log.log("m'attacco al python di sistema per il debug", "info", {} )[m
+[31m-    return is_windows and 'C:/Users/Utente/AppData/Local/Programs/Python/Python310/python.exe' or '/usr/bin/python3'[m
+[32m+[m[32m    return my_global_vars.isWindows and 'C:/Users/Utente/AppData/Local/Programs/Python/Python310/python.exe' or '/usr/bin/python3'[m
+ end[m
+ [m
+ function M.InitDap()[m
+[36m@@ -61,8 +54,8 @@[m [mfunction M.InitDap()[m
+     }[m
+     [m
+     local opts = {noremap=true, silent=true}[m
+[31m-    vim.keymap.set('n', '<leader>dt', function() require('dap').terminate() end, opts) [m
+[31m-    vim.keymap.set("n", "<leader>b", ":lua require'dap'.toggle_breakpoint()<CR>", opts)[m
+[32m+[m[32m    vim.keymap.set('n', '<leader>dt', function() dap.terminate() end, opts)[m[41m [m
+[32m+[m[32m    vim.keymap.set("n", "<leader>b", function() dap.toggle_breakpoint() end, opts)[m
+     vim.keymap.set('n', '<F5>', function() dap.continue() end, opts)[m
+     vim.keymap.set('n', '<F10>', function() dap.step_over() end, opts)[m
+     vim.keymap.set('n', '<F11>', function() dap.step_into() end, opts)[m
+[1mdiff --git a/lua/core/dependecies.lua b/lua/core/dependecies.lua[m
+[1mdeleted file mode 100644[m
+[1mindex 222a36b..0000000[m
+[1m--- a/lua/core/dependecies.lua[m
+[1m+++ /dev/null[m
+[36m@@ -1,19 +0,0 @@[m
+[31m-local WINDOWS = {"choco", "python", "npm"}[m
+[31m-local LINUX = {"wget", "python3", "npm"}[m
+[31m-[m
+[31m-local dep = {}[m
+[31m-[m
+[31m-if vim.g.OS == "Windows_NT" then dep = WINDOWS[m
+[31m-elseif vim.g.OS == "Linux" then  dep = LINUX[m
+[31m-end[m
+[31m-[m
+[31m-function setup_environment()[m
+[31m-    for _, tool in ipairs(dep) do[m
+[31m-        local is_installed = vim.fn.executable(tool) == 1[m
+[31m-        if is_installed then[m
+[31m-            require("notify")(tool .. " è installato", "info", {title = "Dependency Check", timeout = 1000})[m
+[31m-        else[m
+[31m-            require("notify")(tool .. " non è installato", "error", {title = "Dependency Check", timeout = 1000})[m
+[31m-        end[m
+[31m-    end[m
+[31m-end[m
+[1mdiff --git a/lua/core/info.lua b/lua/core/info.lua[m
+[1mnew file mode 100644[m
+[1mindex 0000000..5fde539[m
+[1m--- /dev/null[m
+[1m+++ b/lua/core/info.lua[m
+[36m@@ -0,0 +1,55 @@[m
+[32m+[m[32mlocal p = require("packer")[m
+[32m+[m
+[32m+[m[32mlocal WINDOWS = {"choco", "python", "npm"}[m
+[32m+[m[32mlocal LINUX = {"wget", "python3", "npm"}[m
+[32m+[m
+[32m+[m[32mlocal dep = my_global_vars.isWindows and WINDOWS or LINUX[m
+[32m+[m
+[32m+[m[32m_G.custom_editor_status = {[m
+[32m+[m[32m    ShowPlugs = function ()[m[41m [m
+[32m+[m[32m        for name, plugin in pairs(packer_plugins) do[m
+[32m+[m[32m            if plugin.loaded then print(name)[m
+[32m+[m[32m            else print(name.." ------------> !!! NON INSTALLATO !!!")[m
+[32m+[m[32m            end[m
+[32m+[m[32m        end[m
+[32m+[m[32m    end,[m
+[32m+[m
+[32m+[m[32m    CheckEnv = function()[m[41m [m
+[32m+[m[32m        for _, tool in ipairs(dep) do[m
+[32m+[m[32m            local is_installed = vim.fn.executable(tool) == 1[m
+[32m+[m[32m            if is_installed then[m
+[32m+[m[32m                require("notify")(tool .. " è installato", "info", {title = "Dependency Check", timeout = 1000})[m
+[32m+[m[32m            else[m
+[32m+[m[32m                require("notify")(tool .. " non è installato", "error", {title = "Dependency Check", timeout = 1000})[m
+[32m+[m[32m            end[m
+[32m+[m[32m        end[m
+[32m+[m[32m    end,[m
+[32m+[m
+[32m+[m[32m    Update = function (name)[m
+[32m+[m[32m        vim.cmd(":edit "..my_global_vars.home.."/lua/core/packer.lua")[m
+[32m+[m[32m        vim.cmd(":wa!")[m
+[32m+[m[32m        vim.cmd(":so %")[m
+[32m+[m[32m        if name == "" then p.sync()[m
+[32m+[m[32m        else p.update(name)[m
+[32m+[m[32m        end[m
+[32m+[m[32m    end,[m
+[32m+[m[41m    [m
+[32m+[m[32m    LogPlugin = function ()[m
+[32m+[m[32m        local logs = {}[m
+[32m+[m[32m        for i, file in ipairs(vim.fn.glob(my_global_vars.log.."/*.log",1, 1)) do[m
+[32m+[m[32m            local label = (vim.fn.getfsize(file) > 0) and "   DA CONTROLLARE" or ""[m
+[32m+[m[32m            logs[i] = file .. label[m
+[32m+[m[32m        end[m
+[32m+[m
+[32m+[m[32m        for _, l in ipairs(logs) do print(l) end[m
+[32m+[m[32m    end,[m
+[32m+[m
+[32m+[m[32m    ClearLogs = function ()[m
+[32m+[m[32m        for _, file in ipairs(vim.fn.glob(my_global_vars.log.."/*.log",1, 1)) do[m
+[32m+[m[32m            local file = io.open(file, "w")[m
+[32m+[m[32m            file:write("")[m
+[32m+[m[32m            file:close()[m
+[32m+[m[32m        end[m
+[32m+[m
+[32m+[m[32m    end,[m
+[32m+[m[32m}[m
+[1mdiff --git a/lua/core/lsp_server/init.lua b/lua/core/lsp_server/init.lua[m
+[1mindex ef205a0..0a2d93c 100644[m
+[1m--- a/lua/core/lsp_server/init.lua[m
+[1m+++ b/lua/core/lsp_server/init.lua[m
+[36m@@ -1,56 +1,38 @@[m
+[31m--- Setup nvim-cmp[m
+[31m-local cmp = require('cmp')[m
+[32m+[m[32mrequire("core.lsp_server.snippets")[m
+ [m
+[32m+[m[32mlocal cmp = require("cmp")[m
+[32m+[m[32mlocal luasnip = require("luasnip")[m
+[32m+[m
+[32m+[m[32m--! Setup nvim-cmp[m
+ cmp.setup({[m
+     snippet = {[m
+[31m-        expand = function(args)[m
+[31m-            -- Configura il tuo snippet manager qui[m
+[31m-            vim.fn["vsnip#anonymous"](args.body) -- Per `vsnip`[m
+[31m-            -- require('luasnip').lsp_expand(args.body) -- Per `luasnip`[m
+[31m-        end,[m
+[32m+[m[32m        expand = function(args) luasnip.lsp_expand(args.body) end,[m
+     },[m
+     mapping = {[m
+[31m-        ['<Down>'] = cmp.mapping.select_next_item(),[m
+[31m-        ['<Up>'] = cmp.mapping.select_prev_item(),[m
+[31m-        ['<M-Space>'] = cmp.mapping.complete(),[m
+[31m-        ['<CR>'] = cmp.mapping.confirm({ select = true }),[m
+[32m+[m[32m        ["<Down>"] = cmp.mapping.select_next_item(),[m
+[32m+[m[32m        ["<Up>"] = cmp.mapping.select_prev_item(),[m
+[32m+[m[32m        ["<M-Space>"] = cmp.mapping.complete(),[m
+[32m+[m[32m        ["<CR>"] = cmp.mapping.confirm({ select = true }),[m
+[32m+[m[32m    },[m
+[32m+[m[32m    sources = {[m
+[32m+[m[32m        { name = "luasnip", keyword_length = 0 },[m
+[32m+[m[32m        { name = "nvim_lsp", keyword_length = 1 },[m
+[32m+[m[32m        { name = "buffer", keyword_length = 2 },[m
+     },[m
+[31m-    sources = cmp.config.sources({[m
+[31m-        { name = 'nvim_lsp' }, -- Per suggerimenti LSP[m
+[31m-        { name = 'buffer' },   -- Per suggerimenti basati sul buffer[m
+[31m-    })[m
+ })[m
+ [m
+[31m-local lsp_servers = {[m
+[31m-    pyright = {},[m
+[31m-    tsserver = {},[m
+[31m-    lua_ls = {},[m
+[31m-    -- clangd = {},[m
+[31m-    -- gopls = {},[m
+[31m-}[m
+[31m-[m
+[31m-function OffLspServers()[m
+[31m-    local clients = vim.lsp.get_active_clients()[m
+[31m-    for _, client in ipairs(clients) do[m
+[32m+[m[32mrequire("mason").setup()[m
+[32m+[m
+[32m+[m[32mlocal SERVERS = require("core.lsp_server.server").Server_LSP:new()[m
+[32m+[m
+[32m+[m[32mSERVERS:active()[m
+[32m+[m
+[32m+[m
+[32m+[m[32m--! Stato LSP[m
+[32m+[m[32mfunction vim.g.StopLSP(type)[m
+[32m+[m[32m    for _, client in ipairs(vim.lsp.get_clients()) do[m
+         client.stop()[m
+     end[m
+[31m-    require("notify")("Server LSP Spento", "info", {timeout=1000})[m
+ end[m
+ [m
+[31m-local opts = {noremap=true, silent=true}[m
+[31m-vim.diagnostic.config({[m
+[31m-  signs = true,[m
+[31m-  underline = true,[m
+[31m-})[m
+[31m-[m
+[31m-local view = false[m
+[31m-function viewError() [m
+[31m-    view = not view[m
+[31m-    vim.diagnostic.config({virtual_text = view})[m
+[31m-end[m
+ [m
+[31m-vim.keymap.set('n', '<leader><leader>lp', ':lua require("lspconfig").pyright.setup(require("core.lsp_server.pyright"))<CR>', opts)[m
+[31m-vim.keymap.set('n', '<leader><leader>lj', ':lua require("lspconfig").ts_ls.setup({})<CR>', opts)[m
+[31m-vim.keymap.set('n', '<leader><leader>ll', ':lua require("lspconfig").lua_ls.setup(require("core.lsp_server.lua_ls"))<CR>', opts)[m
+[31m-vim.keymap.set('n', '<leader><leader>lo', ':lua OffLspServers()<CR>', opts)[m
+[31m-vim.keymap.set('n', '<leader>view', ':lua viewError()<CR>', opts)[m
+[1mdiff --git a/lua/core/lsp_server/pyright.lua b/lua/core/lsp_server/pyright.lua[m
+[1mdeleted file mode 100644[m
+[1mindex 813e617..0000000[m
+[1m--- a/lua/core/lsp_server/pyright.lua[m
+[1m+++ /dev/null[m
+[36m@@ -1,69 +0,0 @@[m
+[31m-local function set_python_path(path)[m
+[31m-  local clients = vim.lsp.get_clients {[m
+[31m-    bufnr = vim.api.nvim_get_current_buf(),[m
+[31m-    name = 'pyright',[m
+[31m-  }[m
+[31m-  for _, client in ipairs(clients) do[m
+[31m-    if client.settings then[m
+[31m-      client.settings.python = vim.tbl_deep_extend('force', client.settings.python, { pythonPath = path })[m
+[31m-    else[m
+[31m-      client.config.settings = vim.tbl_deep_extend('force', client.config.settings, { python = { pythonPath = path } })[m
+[31m-    end[m
+[31m-    client.notify('workspace/didChangeConfiguration', { settings = nil })[m
+[31m-  end[m
+[31m-end[m
+[31m-[m
+[31m-return {[m
+[31m-  cmd = { "pyright-langserver", "--stdio" },[m
+[31m-  filetypes = { "python" },[m
+[31m-  single_file_support = true,[m
+[31m-  settings = {[m
+[31m-    python = {[m
+[31m-      analysis = {[m
+[31m-        typeCheckingMode = "strict",  -- "off", "basic", "strict"[m
+[31m-        autoSearchPaths = true,[m
+[31m-        useLibraryCodeForTypes = true,[m
+[31m-        diagnosticSeverityOverrides = {[m
+[31m-          reportUnusedVariable = "warning",  -- o "error"[m
+[31m-          reportUnusedImport = "warning",[m
+[31m-          reportMissingImports = "error",[m
+[31m-          reportUndefinedVariable = "error",[m
+[31m-        },[m
+[31m-      },[m
+[31m-      docstringFormat = "numpy",  -- o "google", "restructuredtext"[m
+[31m-      inlayHints = {[m
+[31m-        variableTypes = true,[m
+[31m-        functionReturnTypes = true,[m
+[31m-      },[m
+[31m-    },[m
+[31m-  },[m
+[31m-  on_attach = function(client, bufnr)[m
+[31m-      vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "Mostra diagnostica" })[m
+[31m-      [m
+[31m-      vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = bufnr, desc = "Vai alla definizione" })[m
+[31m-      [m
+[31m-      vim.keymap.set('n', 'K', function()[m
+[31m-          local params = vim.lsp.util.make_position_params()[m
+[31m-          local hover_results, hover_ctx = client.request_sync('textDocument/hover', params, 1000, bufnr)[m
+[31m-          local sig_results = client.request_sync('textDocument/signatureHelp', params, 1000, bufnr)[m
+[31m-          local lines = {}[m
+[31m-[m
+[31m-          if hover_results and hover_results.result and hover_results.result.contents then[m
+[31m-              local hover_lines = vim.lsp.util.convert_input_to_markdown_lines(hover_results.result.contents)[m
+[31m-              vim.list_extend(lines, hover_lines)[m
+[31m-          end[m
+[31m-          [m
+[31m-          if #lines > 0 then[m
+[31m-              vim.lsp.util.open_floating_preview(lines, "markdown", {[m
+[31m-                  title="Documentazione",[m
+[31m-                  title_pos="right",[m
+[31m-                  relative="editor",[m
+[31m-                  border = "rounded",[m
+[31m-                  focusable = false,[m
+[31m-                  max_width = 90,[m
+[31m-                  max_height = 40,[m
+[31m-              })[m
+[31m-          end[m
+[31m-      end, { buffer = bufnr, desc = "Documentazione estesa" })[m
+[31m-  end[m
+[31m-}[m
+[1mdiff --git a/lua/core/lsp_server/server.lua b/lua/core/lsp_server/server.lua[m
+[1mnew file mode 100644[m
+[1mindex 0000000..b26130f[m
+[1m--- /dev/null[m
+[1m+++ b/lua/core/lsp_server/server.lua[m
+[36m@@ -0,0 +1,42 @@[m
+[32m+[m[32mlocal M = {}[m
+[32m+[m
+[32m+[m[32mM.Server_LSP = {}[m
+[32m+[m[32mM.Server_LSP.__index = M.Server_LSP[m
+[32m+[m
+[32m+[m[32m--* constructor[m
+[32m+[m[32mfunction M.Server_LSP:new()[m
+[32m+[m[32m    return setmetatable({[m
+[32m+[m[32m        servers = {[m
+[32m+[m[32m            python = { patterns = { "*.py" }, name = "pyright", exec = "/pyright-langserver.cmd" },[m
+[32m+[m[32m            typescript = { patterns = { "*.js", "*.ts" }, name = "ts_ls", exec = "/typescript-language-server.cmd" },[m
+[32m+[m[32m        },[m
+[32m+[m[32m    }, self)[m
+[32m+[m[32mend[m
+[32m+[m
+[32m+[m[32m--* start[m
+[32m+[m[32mfunction M.Server_LSP:start(server_name, cmd)[m
+[32m+[m[32m    vim.lsp.start({[m
+[32m+[m[32m        name = server_name,[m
+[32m+[m[32m        cmd = { cmd, "--stdio" },[m
+[32m+[m[32m        capabilities = require("cmp_nvim_lsp")[m
+[32m+[m[32m            .default_capabilities(vim.lsp.protocol.make_client_capabilities()),[m
+[32m+[m[32m    })[m
+[32m+[m[32m    require("notify")(server_name .. " ATTIVATO")[m
+[32m+[m[32mend[m
+[32m+[m
+[32m+[m[32m--* active[m
+[32m+[m[32mfunction M.Server_LSP:active()[m
+[32m+[m[32m    local home = vim.fn.stdpath("data") .. "/mason/bin"[m
+[32m+[m[32m    for _, server in pairs(self.servers) do[m
+[32m+[m[32m        vim.api.nvim_create_autocmd("BufEnter", {[m
+[32m+[m[32m            pattern = server.patterns,[m
+[32m+[m[32m            callback = function()[m
+[32m+[m[32m                if #vim.lsp.get_clients() == 0 then[m
+[32m+[m[32m                    self:start(server.name, home .. server.exec)[m
+[32m+[m[32m                end[m
+[32m+[m[32m            end,[m
+[32m+[m[32m        })[m
+[32m+[m[32m    end[m
+[32m+[m[32mend[m
+[32m+[m
+[32m+[m[32mreturn M[m
+[1mdiff --git a/lua/core/lsp_server/snippets.lua b/lua/core/lsp_server/snippets.lua[m
+[1mnew file mode 100644[m
+[1mindex 0000000..531b749[m
+[1m--- /dev/null[m
+[1m+++ b/lua/core/lsp_server/snippets.lua[m
+[36m@@ -0,0 +1,15 @@[m
+[32m+[m[32mlocal ls = require("luasnip")[m
+[32m+[m
+[32m+[m[32m-- VSCode snippet loader[m
+[32m+[m[32m--require("luasnip.loaders.from_vscode").load({[m
+[32m+[m[32m--    paths = { "C:/Users/Utente/AppData/Local/nvim/snippets/vscode/" }[m
+[32m+[m[32m--})[m
+[32m+[m
+[32m+[m[32m-- SnipMate loader[m
+[32m+[m[32mrequire("luasnip.loaders.from_snipmate").load({[m
+[32m+[m[32m    paths = { vim.fn.stdpath("config") .. "/snippets/snipmate" }[m
+[32m+[m[32m})[m
+[32m+[m
+[32m+[m[32mvim.keymap.set("i", "<C-K>", function() ls.expand() end, {silent = true})[m
+[32m+[m[32mvim.keymap.set("i", "<C-L>", function() ls.jump( 1) end, {silent = true})[m
+[32m+[m[32mvim.keymap.set("i", "<C-J>", function() ls.jump(-1) end, {silent = true})[m
+[1mdiff --git a/lua/core/plugin/notify.lua b/lua/core/notify.lua[m
+[1msimilarity index 100%[m
+[1mrename from lua/core/plugin/notify.lua[m
+[1mrename to lua/core/notify.lua[m
+[1mdiff --git a/lua/core/packer.lua b/lua/core/packer.lua[m
+[1mindex 755f287..5838b70 100644[m
+[1m--- a/lua/core/packer.lua[m
+[1m+++ b/lua/core/packer.lua[m
+[36m@@ -49,6 +49,16 @@[m [mreturn require('packer').startup(function(use)[m
+   -- Plugin per LSP (Language Server Protocol)[m
+   use 'neovim/nvim-lspconfig'    [m
+ [m
+[32m+[m[32m  use({[m
+[32m+[m[41m  [m	[32m"L3MON4D3/LuaSnip",[m
+[32m+[m[41m  [m	[32m-- follow latest release.[m
+[32m+[m[41m  [m	[32mtag = "v2.4.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)[m
+[32m+[m[41m  [m	[32mrun = "make install_jsregexp"[m
+[32m+[m[32m  })[m
+[32m+[m
+[32m+[m[32m  use "mason-org/mason-lspconfig.nvim"[m
+[32m+[m[32m  use "mason-org/mason.nvim"[m
+[32m+[m
+   -- Plugin per nvim-cmp e le sue fonti[m
+   use 'hrsh7th/nvim-cmp'         -- Il motore di completamento principale[m
+   use 'hrsh7th/cmp-nvim-lsp'     -- Fonte di completamento per LSP[m
+[1mdiff --git a/lua/core/plugin/color.lua b/lua/core/plugin/color.lua[m
+[1mindex 21521c3..736f234 100644[m
+[1m--- a/lua/core/plugin/color.lua[m
+[1m+++ b/lua/core/plugin/color.lua[m
+[36m@@ -52,4 +52,4 @@[m [mrequire("catppuccin").setup({[m
+ })[m
+ [m
+ -- setup must be called before loading[m
+[31m-vim.cmd.colorscheme "lunaperche"[m
+[32m+[m[32mvim.cmd.colorscheme "wildcharm"[m
+[1mdiff --git a/lua/core/plugin/formatter.lua b/lua/core/plugin/formatter.lua[m
+[1mindex 864659e..a2c33dc 100644[m
+[1m--- a/lua/core/plugin/formatter.lua[m
+[1m+++ b/lua/core/plugin/formatter.lua[m
+[36m@@ -10,7 +10,7 @@[m [mlocal function save_buffer_with_same_extension()[m
+     local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)[m
+     local content = table.concat(lines, "\n")[m
+ [m
+[31m-    local temp_file = vim.g.home .. "/lua/core/plugin/formatter/INPUT" .. ext[m
+[32m+[m[32m    local temp_file = my_global_vars.home .. "/lua/core/plugin/formatter/INPUT" .. ext[m
+     local f = io.open(temp_file, "w")[m
+     if f then[m
+         f:write(content)[m
+[36m@@ -20,7 +20,7 @@[m [mlocal function save_buffer_with_same_extension()[m
+         return[m
+     end[m
+ [m
+[31m-    vim.cmd("!python ".. vim.g.home .."/lua/core/plugin/formatter/main.py " .. file_path .. " " .. temp_file)[m
+[32m+[m[32m    vim.cmd("!python ".. my_global_vars..home .."/lua/core/plugin/formatter/main.py " .. file_path .. " " .. temp_file)[m
+ [m
+     return file_path, temp_file[m
+ end[m
+[1mdiff --git a/lua/core/plugin/github.lua b/lua/core/plugin/github.lua[m
+[1mindex d562332..b986723 100644[m
+[1m--- a/lua/core/plugin/github.lua[m
+[1m+++ b/lua/core/plugin/github.lua[m
+[36m@@ -1,4 +1,4 @@[m
+[31m-local L = require("core.plugin.notify")[m
+[32m+[m[32mlocal L = require("core.notify")[m
+ [m
+ function pushGithub(branch, namespace, comment)[m
+     -- Validate commit message[m
+[1mdiff --git a/lua/core/plugin/lettori.lua b/lua/core/plugin/lettori.lua[m
+[1mindex 3d16825..8e500fc 100644[m
+[1m--- a/lua/core/plugin/lettori.lua[m
+[1m+++ b/lua/core/plugin/lettori.lua[m
+[36m@@ -1,13 +1,8 @@[m
+ local key = vim.keymap.set[m
+ local opts = { noremap = true, silent = true }[m
+ [m
+[31m-[m
+[31m-[m
+[31m-local path = vim.fn.stdpath("data")[m
+[31m-[m
+[31m-if vim.g.OS == "Windows_NT" then path = path .. "/csvlens.nvim/"[m
+[31m-elseif vim.g.OS == "Linux" then  path = path .. "/site/pack/packer/start/csvlens.nvim/" [m
+[31m-end[m
+[32m+[m[32mlocal plug = my_global_vars.isWindows and "/csvlens.nvim/" or "/site/pack/packer/start/csvlens.nvim/"[m
+[32m+[m[32mlocal path = my_global_vars.data .. plug[m
+ [m
+ require("csvlens").setup({[m
+     direction = "float",[m
+[1mdiff --git a/lua/core/plugin/telescope/changeProject/const.lua b/lua/core/plugin/telescope/changeProject/const.lua[m
+[1mindex 0a4812d..4fb3635 100644[m
+[1m--- a/lua/core/plugin/telescope/changeProject/const.lua[m
+[1m+++ b/lua/core/plugin/telescope/changeProject/const.lua[m
+[36m@@ -1,13 +1,12 @@[m
+ local M = {}[m
+ [m
+[31m-local OS = vim.loop.os_uname().sysname[m
+[31m-[m
+[31m-if vim.g.OS == "Windows_NT" then[m
+[32m+[m[32mif vim.g.isWindows then[m
+     M.projects = {[m
+         ["My Libraries"] = "C:/Users/Utente/Desktop/MyLibrary",[m
+         ["Scrivi Un Emozione"] = "C:/Users/Utente/Desktop/altro/canzoni/testi/Influencer",[m
+         ["WORK - KTA"] = "C:/Users/Utente/Desktop/RDP/KTA",[m
+         ["Update Nvim"] = "C:/Users/Utente/AppData/Local/nvim",[m
+[32m+[m[32m        ["Update Nvim-Data"] = "C:/Users/Utente/AppData/Local/nvim-data",[m
+         ["WORK - Variables"] = "C:/Users/Utente/Desktop/TEMP_sistema config files",[m
+         ["WORK - DoValue - Document Generator"] = "C:/Users/Utente/Desktop/RDP/DoValue/databackbone",[m
+         ["WORK - Fasdac"] = "C:/Users/Utente/Desktop/RDP/KTA/fasdac",[m
+[36m@@ -17,7 +16,7 @@[m [mif vim.g.OS == "Windows_NT" then[m
+     }[m
+ [m
+ [m
+[31m-elseif vim.g.OS == "Linux" then[m
+[32m+[m[32melse[m
+     M.projects = {[m
+         ["LIB - nvim"] = "/home/riccardo/.config/nvim",[m
+         ["My Libraries"] = "/home/riccardo/Scrivania/MyLib",[m
+[1mdiff --git a/lua/core/plugin/telescope/snippets/const.lua b/lua/core/plugin/telescope/snippets/const.lua[m
+[1mindex 8cbb0d7..ad9fd55 100644[m
+[1m--- a/lua/core/plugin/telescope/snippets/const.lua[m
+[1m+++ b/lua/core/plugin/telescope/snippets/const.lua[m
+[36m@@ -1,23 +1,10 @@[m
+ local M = {}[m
+ [m
+[31m-local home = vim.g.home .. "/lua/core/plugin/telescope/snippets/libs"[m
+[31m-local web = home.."/web"[m
+[31m-local kta = home.."/KTA"[m
+[32m+[m[32mlocal home = my_global_vars.home .. "/lua/core/plugin/telescope/snippets/libs"[m
+ [m
+ M.snippets = {[m
+[31m-   ["HTML - Default Page"] = home .. "/html.html",[m
+    ["Golang - Server Init"] = home .. "/go_Server1.go",[m
+    ["Golang - Server Utils"] = home .. "/go_Server2.go",[m
+    ["Python - Connect Imap"] = home .. "/py_Imap.py",[m
+[31m-   ["Python - script with parameters"] = home .. "/tool_cli.py",[m
+[31m-   ["Python - Example of Typification"] = home .. "/type.py",[m
+[31m-   ["CSS - Base"] = web .. "/css/style.css",[m
+[31m-   ["JS - Utils"] = web .. "/js/utils.js",[m
+[31m-   ["TS - Utils"] = web .. "/js/utils.ts",[m
+[31m-   ["JS - DownloadFile"] = web .. "/js/downloadFile.js",[m
+[31m-   ["CSharp - KTA - Debug"] = kta .. "/debug.cs",[m
+[31m-   ["CSharp - KTA - Main"] = kta .. "/main.cs",[m
+[31m-   ["CSharp - KTA - Parser"] = kta .. "/parser.cs",[m
+[31m-   ["JS - KTA - Form"] = kta .. "/wrapper_formObject.js",[m
+ }[m
+ return M[m
+[1mdiff --git a/lua/core/plugin/telescope/snippets/libs/KTA/debug.cs b/lua/core/plugin/telescope/snippets/libs/KTA/debug.cs[m
+[1mdeleted file mode 100644[m
+[1mindex 43d0755..0000000[m
+[1m--- a/lua/core/plugin/telescope/snippets/libs/KTA/debug.cs[m
+[1m+++ /dev/null[m
+[36m@@ -1,47 +0,0 @@[m
+[31m-//*Debug[m
+[31m-//non serve in produzione[m
+[31m-public class Logger[m
+[31m-{[m
+[31m-    private static string path;[m
+[31m-    [m
+[31m-    public Logger (string path_filelog)[m
+[31m-    {[m
+[31m-        path = path_filelog;[m
+[31m-    }[m
+[31m-[m
+[31m-    public void Log(string message)[m
+[31m-    {[m
+[31m-        using (StreamWriter sw = new StreamWriter(path, true))[m
+[31m-        {[m
+[31m-            sw.WriteLine(message);[m
+[31m-        }[m
+[31m-    }[m
+[31m-[m
+[31m-    public void Properties(string objectName, object obj)[m
+[31m-    {[m
+[31m-        if (obj == null)[m
+[31m-        {[m
+[31m-            Log(objectName+" è NULL");[m
+[31m-            return;[m
+[31m-        }[m
+[31m-    [m
+[31m-        Log("\n\n=== PROPRIETÀ DI "+objectName.ToUpper()+" ===");[m
+[31m-        [m
+[31m-        var properties = obj.GetType().GetProperties();[m
+[31m-        foreach (var prop in properties)[m
+[31m-        {[m
+[31m-            try[m
+[31m-            {[m
+[31m-                if(Convert.ToBoolean(prop.GetValue(obj)))[m
+[31m-                {[m
+[31m-                    Log(prop.Name+": "+prop.GetValue(obj));[m
+[31m-                }[m
+[31m-                else{Log(prop.Name+": null");}[m
+[31m-            }[m
+[31m-            catch (Exception ex)[m
+[31m-            {[m
+[31m-                Log(prop.Name+": [ERRORE] "+ex.Message);[m
+[31m-            }[m
+[31m-        }[m
+[31m-    }[m
+[31m-}[m
+[1mdiff --git a/lua/core/plugin/telescope/snippets/libs/KTA/main.cs b/lua/core/plugin/telescope/snippets/libs/KTA/main.cs[m
+[1mdeleted file mode 100644[m
+[1mindex 31dc354..0000000[m
+[1m--- a/lua/core/plugin/telescope/snippets/libs/KTA/main.cs[m
+[1m+++ /dev/null[m
+[36m@@ -1,49 +0,0 @@[m
+[31m-//! Creare Pagina Help[m
+[31m-//. Classi aggiuntive[m
+[31m-[m
+[31m-//. Logger[m
+[31m-//TODO da migliorare Properties[m
+[31m-//.     - void Log(string msg) -> scrivi delle stringhe in un file[m
+[31m-//.     - void Properties(string idetifier, string msg) -> scrivi delle stringhe in un file[m
+[31m-[m
+[31m-[m
+[31m-//. Parser[m
+[31m-//.    - JSON___Str_Str(Dictonary(<string>, <string>))[m
+[31m-//.    - JSON___arrayStr(List<string>)[m
+[31m-//! ...........................................................................................[m
+[31m-[m
+[31m-using System;[m
+[31m-using System.Globalization;[m
+[31m-using System.Data;[m
+[31m-using Agility.Server.Scripting.ScriptAssembly;[m
+[31m-using System.IO;[m
+[31m-using System.Collections.Generic;[m
+[31m-[m
+[31m-namespace MyValidator[m
+[31m-{[m
+[31m-    //*In caso servisse gestire un errore in un Validation Handler[m
+[31m-    public class ReturnValues[m
+[31m-    {[m
+[31m-        public string Fieldname;[m
+[31m-        public string ErrorDescription;[m
+[31m-    }[m
+[31m-[m
+[31m-    public class Validator[m
+[31m-    {[m
+[31m-[m
+[31m-        [StartMethod][m
+[31m-        public void Main(ScriptParameters sp)[m
+[31m-        {[m
+[31m-            //[m
+[31m-            // Scrivi Qui il tuo codice[m
+[31m-            //[m
+[31m-        }[m
+[31m-[m
+[31m-[m
+[31m-        //*In caso servisse gestire Un Validator[m
+[31m-        public static ReturnValues Validation(string json)[m
+[31m-        {[m
+[31m-        }[m
+[31m-[m
+[31m-    }[m
+[31m-}[m
+[1mdiff --git a/lua/core/plugin/telescope/snippets/libs/KTA/parser.cs b/lua/core/plugin/telescope/snippets/libs/KTA/parser.cs[m
+[1mdeleted file mode 100644[m
+[1mindex 04954be..0000000[m
+[1m--- a/lua/core/plugin/telescope/snippets/libs/KTA/parser.cs[m
+[1m+++ /dev/null[m
+[36m@@ -1,38 +0,0 @@[m
+[31m-public class Parser[m
+[31m-{[m
+[31m-    public string[] JSON___Str_Str(string json) [m
+[31m-    //  {[m
+[31m-    //    "...": "...",[m
+[31m-    //    ...[m
+[31m-    //  } [m
+[31m-    {[m
+[31m-        var lista = new List<string>();[m
+[31m-        bool inQuotes = false;[m
+[31m-        var current = "";[m
+[31m-        json = json.Trim().TrimStart('{').TrimEnd('}');[m
+[31m-        for (int i = 0; i < json.Length; i++)[m
+[31m-        {[m
+[31m-            char c = json[i];[m
+[31m-            if (c == '\"') {inQuotes = !inQuotes;}[m
+[31m-            if (c == ',' && !inQuotes)[m
+[31m-            {[m
+[31m-                lista.Add(current.ToString().Trim());[m
+[31m-                current = "";[m
+[31m-            }[m
+[31m-            else{ current = current + c;}[m
+[31m-        }[m
+[31m-        if (current.Length > 0){lista.Add(current.ToString().Trim());}[m
+[31m-        var result = new List<string>();[m
+[31m-        foreach (var pair in lista)[m
+[31m-        {[m
+[31m-            var parts = pair.Split(new[] { ':' }, 2);[m
+[31m-            if (parts.Length == 2)[m
+[31m-            {[m
+[31m-                string key = parts[0].Trim().Trim('\"');[m
+[31m-                string value = parts[1].Trim().Trim('\"');[m
+[31m-                result.Add(key+" "+value);[m
+[31m-            }[m
+[31m-        }[m
+[31m-        return result.ToArray();[m
+[31m-    }[m
+[31m-}[m
+[1mdiff --git a/lua/core/plugin/telescope/snippets/libs/KTA/wrapper_formObject.js b/lua/core/plugin/telescope/snippets/libs/KTA/wrapper_formObject.js[m
+[1mdeleted file mode 100644[m
+[1mindex c017782..0000000[m
+[1m--- a/lua/core/plugin/telescope/snippets/libs/KTA/wrapper_formObject.js[m
+[1m+++ /dev/null[m
+[36m@@ -1,23 +0,0 @@[m
+[31m-class myForm {[m
+[31m-    constructor(type){[m
+[31m-        this.type = type[m
+[31m-    }[m
+[31m-    public get(name){[m
+[31m-        if(this.type == "control"){[m
+[31m-            return Forms.SDK.GetFormControlValue(name)[m
+[31m-        }[m
+[31m-        else if(this.type == "variable"){[m
+[31m-            return Forms.SDK.GetFormVariableValue(name)[m
+[31m-        }[m
+[31m-        else{ return new Error(`type = [control, variable] not ${this.type}`) }[m
+[31m-    }[m
+[31m-    public set(name, value){[m
+[31m-        if(this.type == "control"){[m
+[31m-            return Forms.SDK.SetFormControlValue(name, value)[m
+[31m-        }[m
+[31m-        else if(this.type == "variable"){[m
+[31m-            return Forms.SDK.SetFormVariableValue(name, value)[m
+[31m-        }[m
+[31m-        else{ return new Error(`type = [control, variable] not ${this.type}`) }[m
+[31m-    }[m
+[31m-}[m
+[1mdiff --git a/lua/core/plugin/telescope/snippets/libs/html.html b/lua/core/plugin/telescope/snippets/libs/html.html[m
+[1mdeleted file mode 100644[m
+[1mindex f24b9cb..0000000[m
+[1m--- a/lua/core/plugin/telescope/snippets/libs/html.html[m
+[1m+++ /dev/null[m
+[36m@@ -1,17 +0,0 @@[m
+[31m-<!DOCTYPE html>[m
+[31m-<html lang="en">[m
+[31m-  <head>[m
+[31m-    <meta charset="UTF-8">[m
+[31m-    <meta name="viewport" content="width=device-width, initial-scale=1.0">[m
+[31m-    <meta http-equiv="X-UA-Compatible" content="ie=edge">[m
+[31m-    <title>My Website</title>[m
+[31m-    <link rel="stylesheet" href="./style.css">[m
+[31m-    <link rel="icon" href="./favicon.ico" type="image/x-icon">[m
+[31m-  </head>[m
+[31m-  <body>[m
+[31m-    <main>[m
+[31m-        <h1>Welcome to My Website</h1>  [m
+[31m-    </main>[m
+[31m-    <script src="index.js"></script>[m
+[31m-  </body>[m
+[31m-</html>[m
+[1mdiff --git a/lua/core/plugin/telescope/snippets/libs/tool_cli.py b/lua/core/plugin/telescope/snippets/libs/tool_cli.py[m
+[1mdeleted file mode 100644[m
+[1mindex a5dcfe8..0000000[m
+[1m--- a/lua/core/plugin/telescope/snippets/libs/tool_cli.py[m
+[1m+++ /dev/null[m
+[36m@@ -1,16 +0,0 @@[m
+[31m-from argparse import ArgumentParser[m
+[31m-[m
+[31m-cmd = ArgumentParser([m
+[31m-    prog="<name_tool>",[m
+[31m-    description="",[m
+[31m-)[m
+[31m-[m
+[31m-cmd.add_argument([m
+[31m-        "-","--",[m
+[31m-        choices=[],[m
+[31m-        action="",[m
+[31m-        help="",[m
+[31m-        required=False[m
+[31m-)[m
+[31m-[m
+[31m-args = cmd.parse_args()[m
+[1mdiff --git a/lua/core/plugin/telescope/snippets/libs/type.py b/lua/core/plugin/telescope/snippets/libs/type.py[m
+[1mdeleted file mode 100644[m
+[1mindex a93733b..0000000[m
+[1m--- a/lua/core/plugin/telescope/snippets/libs/type.py[m
+[1m+++ /dev/null[m
+[36m@@ -1,25 +0,0 @@[m
+[31m-from dataclasses import dataclass[m
+[31m-from typing import Literal[m
+[31m-[m
+[31m-@dataclass[m
+[31m-class Investment:[m
+[31m-    start: int[m
+[31m-    tasse: Literal["STATO", "PRIVATO"][m
+[31m-    [m
+[31m-    def __post_init__(self):[m
+[31m-        errorDescription = "oggetto non valido"[m
+[31m-        [m
+[31m-        if not all(isinstance(v, str) for v in (self.isin, self.scadenza, self.ultima_cedola)):[m
+[31m-            raise TypeError(errorDescription)[m
+[31m-[m
+[31m-        if not all(isinstance(v, float) for v in ([m
+[31m-            self.tasso_lordo,[m
+[31m-            self.valore_nominale,[m
+[31m-            self.prezzo,[m
+[31m-            self.costi_di_gestione,[m
+[31m-            self.start_con_cambio_valuta,[m
+[31m-        )):[m
+[31m-            raise TypeError(errorDescription)[m
+[31m-[m
+[31m-        if not isinstance(self.valore_nominale_euro, bool):[m
+[31m-            raise TypeError(errorDescription)[m
+[1mdiff --git a/lua/core/plugin/telescope/snippets/libs/web/css/style.css b/lua/core/plugin/telescope/snippets/libs/web/css/style.css[m
+[1mdeleted file mode 100644[m
+[1mindex 1658834..0000000[m
+[1m--- a/lua/core/plugin/telescope/snippets/libs/web/css/style.css[m
+[1m+++ /dev/null[m
+[36m@@ -1,67 +0,0 @@[m
+[31m-* {box-sizing: border-box;margin: 0;padding: 0;}[m
+[31m-body {max-width: 100vw;max-height: 100vh;width: 100vw;height: 100vh;cursor:default;overflow-y:auto}[m
+[31m-.pointer{cursor: pointer}[m
+[31m-[m
+[31m-/* FLEX */[m
+[31m-.d-f{display: flex;}[m
+[31m-.d-f-r{display:flex;flex-direction:row}[m
+[31m-.d-f-r-sa{display:flex;flex-direction:row;justify-content:space-around}[m
+[31m-.d-f-r-sb{display:flex;flex-direction: row;justify-content:space-between}[m
+[31m-.d-f-r-sa-c{display:flex;flex-direction:row;justify-content:space-around;align-items:center}[m
+[31m-.d-f-r-sb-c{display:flex;flex-direction: row;justify-content:space-between;align-items:center}[m
+[31m-.d-f-r-c-c{display:flex;flex-direction: row;justify-content:center;align-items:center}[m
+[31m-.d-f-c{display:flex;flex-direction:column}[m
+[31m-.d-f-c-sa{display:flex;flex-direction:column;justify-content:space-around}[m
+[31m-.d-f-c-sb{display:flex;flex-direction:column;justify-content:space-between}[m
+[31m-.d-f-c-sa-c{display:flex;flex-direction:column;justify-content:space-around;align-items:center}[m
+[31m-.d-f-c-sb-c{display:flex;flex-direction:column;justify-content:space-between;align-items:center}[m
+[31m-.d-f-c-c-c{display:flex;flex-direction:column;justify-content:center;align-items:center}[m
+[31m-.flex-1{flex:1;}.flex-2{flex:2;}.flex-3{flex:3;}.flex-4{flex:4;}.flex-5{flex:5;}[m
+[31m-[m
+[31m-/* GRID */[m
+[31m-.d-g {display: grid;}[m
+[31m-.d-g-1 {grid-template-columns: repeat(1, 1fr);}[m
+[31m-.d-g-2 {grid-template-columns: repeat(2, 1fr);}[m
+[31m-.d-g-3 {grid-template-columns: repeat(3, 1fr);}[m
+[31m-.d-g-4 {grid-template-columns: repeat(4, 1fr);}[m
+[31m-.d-g-5 {grid-template-columns: repeat(5, 1fr);}[m
+[31m-[m
+[31m-.d-g-r-1 {grid-template-rows: repeat(1, 1fr);}[m
+[31m-.d-g-r-2 {grid-template-rows: repeat(2, 1fr);}[m
+[31m-.d-g-r-3 {grid-template-rows: repeat(3, 1fr);}[m
+[31m-.d-g-r-4 {grid-template-rows: repeat(4, 1fr);}[m
+[31m-.d-g-r-5 {grid-template-rows: repeat(5, 1fr);}[m
+[31m-[m
+[31m-.d-g-gap-1 {gap: 0.25rem;}[m
+[31m-.d-g-gap-2 {gap: 0.5rem;}[m
+[31m-.d-g-gap-3 {gap: 1rem;}[m
+[31m-[m
+[31m-.d-g-center {place-items: center;}[m
+[31m-.d-g-start {justify-items: start; align-items: start;}[m
+[31m-.d-g-end {justify-items: end; align-items: end;}[m
+[31m-[m
+[31m-/* ANIMATIONS */[m
+[31m-@keyframes ToRight {[m
+[31m-    0% { transform: translateX(0); }[m
+[31m-    100% { transform: translateX(2%); }[m
+[31m-}[m
+[31m-@keyframes ToLeft {[m
+[31m-    0% { transform: translateX(0); }[m
+[31m-    100% { transform: translateX(-2%); }[m
+[31m-}[m
+[31m-@keyframes ToTop {[m
+[31m-    0% { transform: translateY(0); }[m
+[31m-    100% { transform: translateY(-2%); }[m
+[31m-}[m
+[31m-@keyframes ToBottom {[m
+[31m-    0% { transform: translateY(0); }[m
+[31m-    100% { transform: translateY(2%); }[m
+[31m-}[m
+[31m-@keyframes View {[m
+[31m-    0% { opacity:0}[m
+[31m-    100% { opacity:1}[m
+[31m-}[m
+[31m-@keyframes Hidden {[m
+[31m-    0% { opacity:1}[m
+[31m-    100% { opacity:0}[m
+[31m-}[m
+[1mdiff --git a/lua/core/plugin/telescope/snippets/libs/web/js/downloadFile.js b/lua/core/plugin/telescope/snippets/libs/web/js/downloadFile.js[m
+[1mdeleted file mode 100644[m
+[1mindex 9992b83..0000000[m
+[1m--- a/lua/core/plugin/telescope/snippets/libs/web/js/downloadFile.js[m
+[1m+++ /dev/null[m
+[36m@@ -1,18 +0,0 @@[m
+[31m-function downloadFile({[m
+[31m-    filename, [m
+[31m-    content,[m
+[31m-    contentType[m
+[31m-}) {[m
+[31m-    const blob = new Blob([content], { type: contentType }); // Cambia il tipo se necessario[m
+[31m-    const url = URL.createObjectURL(blob); // Crea un URL per il blob[m
+[31m-[m
+[31m-    const a = document.createElement('a');[m
+[31m-    a.href = url;[m
+[31m-    a.download = filename; // Assegna il nome del file[m
+[31m-[m
+[31m-    document.body.appendChild(a);[m
+[31m-    a.click(); [m
+[31m-    document.body.removeChild(a);[m
+[31m-[m
+[31m-    URL.revokeObjectURL(url);[m
+[31m-}[m
+[1mdiff --git a/lua/core/plugin/telescope/snippets/libs/web/js/getDataBorsaItaliana.js b/lua/core/plugin/telescope/snippets/libs/web/js/getDataBorsaItaliana.js[m
+[1mdeleted file mode 100644[m
+[1mindex 28b57d7..0000000[m
+[1m--- a/lua/core/plugin/telescope/snippets/libs/web/js/getDataBorsaItaliana.js[m
+[1m+++ /dev/null[m
+[36m@@ -1,44 +0,0 @@[m
+[31m-function downloadFile(options) {[m
+[31m-  const { filename, content, contentType } = options;[m
+[31m-  const blob = new Blob([content], { type: contentType });[m
+[31m-  const url = URL.createObjectURL(blob);[m
+[31m-[m
+[31m-  const a = document.createElement('a');[m
+[31m-  a.href = url;[m
+[31m-  a.download = filename;[m
+[31m-[m
+[31m-  document.body.appendChild(a);[m
+[31m-  a.click();[m
+[31m-  document.body.removeChild(a);[m
+[31m-[m
+[31m-  URL.revokeObjectURL(url);[m
+[31m-}[m
+[31m-[m
+[31m-const tables = document.querySelectorAll("table");[m
+[31m-[m
+[31m-let titles = ["Name"];[m
+[31m-let values = ["Micron Technology"];[m
+[31m-const getTitle = false;[m
+[31m-[m
+[31m-tables.forEach((table, i) => {[m
+[31m-  if (i > 1) return;[m
+[31m-  const spans = table.querySelectorAll("span");[m
+[31m-  spans.forEach((span, j) => {[m
+[31m-    const text = span.textContent?.trim().replace(/"/g, '""') ?? "";[m
+[31m-    const quoted = `"${text}"`;[m
+[31m-    if (j % 2 === 1) {[m
+[31m-      values.push(quoted);[m
+[31m-    } else if (getTitle && i === 0) {[m
+[31m-      titles.push(quoted);[m
+[31m-    }[m
+[31m-  });[m
+[31m-});[m
+[31m-[m
+[31m-//const csv = "\uFEFF" + titles.join(",") + "\n" + values.join(",");[m
+[31m-//[m
+[31m-//downloadFile({[m
+[31m-//  filename: "www.borsaitaliana.it_FTSE_MIB.csv",[m
+[31m-//  content: csv,[m
+[31m-//  contentType: "text/csv;charset=utf-8"[m
+[31m-//});[m
+[31m-console.log(values.join(","))[m
+[1mdiff --git a/lua/core/plugin/telescope/snippets/libs/web/js/school/card.js b/lua/core/plugin/telescope/snippets/libs/web/js/school/card.js[m
+[1mdeleted file mode 100644[m
+[1mindex 21365cc..0000000[m
+[1m--- a/lua/core/plugin/telescope/snippets/libs/web/js/school/card.js[m
+[1m+++ /dev/null[m
+[36m@@ -1,34 +0,0 @@[m
+[31m-const c = new Convert()[m
+[31m-[m
+[31m-function SetEventBtn(card, type){[m
+[31m-    const [inputText, outputText] = card.querySelectorAll("textarea");[m
+[31m-    const inputFile = card.querySelector("input");[m
+[31m-    card.querySelectorAll("button")[0].onclick = () => {[m
+[31m-        c.SERVICE(inputFile, inputText, outputText, type);[m
+[31m-    }[m
+[31m-}[m
+[31m-[m
+[31m-class DoValue extends Convert {[m
+[31m-   constructor(project, template, databackbone, type){[m
+[31m-        this.XML = `[m
+[31m-            [m
+[31m-<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://www.aiasoftware.com/cloud/v1">[m
+[31m-   <soapenv:Header/>[m
+[31m-   <soapenv:Body>[m
+[31m-      <v1:Compose${type}V1Request>[m
+[31m-         <v1:partner>CCM</v1:partner>[m
+[31m-         <v1:customer>Local</v1:customer>[m
+[31m-         <v1:contracttypename>CCMInteractive</v1:contracttypename>[m
+[31m-         <v1:contracttypeversion>V1</v1:contracttypeversion>[m
+[31m-         <v1:jobid>12345</v1:jobid>[m
+[31m-         <v1:project>${project}</v1:project>[m
+[31m-         <v1:documenttemplate>${template}</v1:documenttemplate>[m
+[31m-         <v1:databackbonexml>${DoValue.b}</v1:databackbonexml>[m
+[31m-         <v1:status>Current</v1:status>[m
+[31m-      </v1:Compose${type}V1Request>[m
+[31m-   </soapenv:Body>[m
+[31m-</soapenv:Envelope>[m
+[31m-[m
+[31m-       `[m
+[31m-   } [m
+[31m-}[m
+[1mdiff --git a/lua/core/plugin/telescope/snippets/libs/web/js/school/component.js b/lua/core/plugin/telescope/snippets/libs/web/js/school/component.js[m
+[1mdeleted file mode 100644[m
+[1mindex de02996..0000000[m
+[1m--- a/lua/core/plugin/telescope/snippets/libs/web/js/school/component.js[m
+[1m+++ /dev/null[m
+[36m@@ -1,34 +0,0 @@[m
+[31m-const CardContent = ({title}) => {[m
+[31m-    return `[m
+[31m-        <div style="display:flex;flex-direction:column;gap:12px" class="card">[m
+[31m-            <i>${title}</i>[m
+[31m-            <input type="file"/>[m
+[31m-            <textarea placeholder="input..."></textarea>   [m
+[31m-            <textarea placeholder="output..."></textarea>   [m
+[31m-            <div style="display:flex; gap:10px; justify-content:right">[m
+[31m-                <button class="btn">Esegui</button>[m
+[31m-            </div>[m
+[31m-        </div>[m
+[31m-    `[m
+[31m-}[m
+[31m-[m
+[31m-const CardDoValue = () => {[m
+[31m-    return `[m
+[31m-        <div style="display:flex;flex-direction:column;gap:12px" class="card">[m
+[31m-            <i>XML TO KCM</i>[m
+[31m-            <input type="file"/>[m
+[31m-            <div id="form">[m
+[31m-                <input placeholder="Nome Progetto"/>[m
+[31m-                <input placeholder="Nome Template"/>[m
+[31m-                <select>[m
+[31m-                    <option value="Pdf">PDF</option>[m
+[31m-                    <option value="Docx">DOCX</option>[m
+[31m-                </select>[m
+[31m-            </div>[m
+[31m-            <textarea placeholder="Databackbone"></textarea>   [m
+[31m-            <div style="display:flex; gap:10px; justify-content:right">[m
+[31m-                <button class="btn">Esegui</button>[m
+[31m-            </div>[m
+[31m-        </div>[m
+[31m-    `[m
+[31m-}[m
+[1mdiff --git a/lua/core/plugin/telescope/snippets/libs/web/js/school/test.html b/lua/core/plugin/telescope/snippets/libs/web/js/school/test.html[m
+[1mdeleted file mode 100644[m
+[1mindex 9940e40..0000000[m
+[1m--- a/lua/core/plugin/telescope/snippets/libs/web/js/school/test.html[m
+[1m+++ /dev/null[m
+[36m@@ -1,26 +0,0 @@[m
+[31m-<!DOCTYPE html>[m
+[31m-<html lang="en">[m
+[31m-  <head>[m
+[31m-    <meta charset="UTF-8">[m
+[31m-    <meta name="viewport" content="width=device-width, initial-scale=1.0">[m
+[31m-    <meta http-equiv="X-UA-Compatible" content="ie=edge">[m
+[31m-    <title>My Website</title>[m
+[31m-    <link rel="stylesheet" href="./style.css">[m
+[31m-  </head>[m
+[31m-  <body>[m
+[31m-    <script src="utils.js"></script>[m
+[31m-    <script src="component.js"></script>[m
+[31m-    <script src="card.js"></script>[m
+[31m-    <script>[m
+[31m-        document.body.append([m
+[31m-            Create({ tag:"div", props: { innerHTML: CardContent({ title: "file to base64" }) }}),[m
+[31m-            Create({ tag:"div", props: { innerHTML: CardContent({ title: "base64 to file" }) }}),[m
+[31m-            Create({ tag:"div", props: { innerHTML: CardDoValue() }})[m
+[31m-        )[m
+[31m-        [m
+[31m-        const cards = document.querySelectorAll(".card");[m
+[31m-        SetEventBtn(cards[0], "toB64");[m
+[31m-        SetEventBtn(cards[1], "fromB64");[m
+[31m-    </script>[m
+[31m-  </body>[m
+[31m-</html>[m
+[1mdiff --git a/lua/core/plugin/telescope/snippets/libs/web/js/school/utils.js b/lua/core/plugin/telescope/snippets/libs/web/js/school/utils.js[m
+[1mdeleted file mode 100644[m
+[1mindex 5bff895..0000000[m
+[1m--- a/lua/core/plugin/telescope/snippets/libs/web/js/school/utils.js[m
+[1m+++ /dev/null[m
+[36m@@ -1,53 +0,0 @@[m
+[31m-function Create({tag, style = {}, props = {}, event=null}) {[m
+[31m-    const element = document.createElement(tag)[m
+[31m-    Object.assign(element.style, style)[m
+[31m-    for (let key in props) {[m
+[31m-        if (key === "class") { props[key].forEach(className => element.classList.add(className)) } [m
+[31m-        else { Object.assign(element, props) }[m
+[31m-    }[m
+[31m-    if(event){element.addEventListener(event["type"], event["func"])}[m
+[31m-    return element[m
+[31m-}[m
+[31m-[m
+[31m-[m
+[31m-class Convert {[m
+[31m-[m
+[31m-    static bytesToBase64(bytes) {[m
+[31m-      let binary = "";[m
+[31m-      bytes.forEach(b => binary += String.fromCharCode(b));[m
+[31m-      return btoa(binary);[m
+[31m-    }[m
+[31m-    [m
+[31m-    static base64ToBytes(base64) {[m
+[31m-      let binary = atob(base64);[m
+[31m-      let bytes = new Uint8Array(binary.length);[m
+[31m-      for (let i=0; i<binary.length; i++) bytes[i] = binary.charCodeAt(i);[m
+[31m-      return bytes;[m
+[31m-    }[m
+[31m-[m
+[31m-[m
+[31m-    SERVICE(inputFile, inputText, outputText, type){[m
+[31m-        if(type === "toB64" && inputFile.files[0]){[m
+[31m-            const file = inputFile.files[0];[m
+[31m-            const reader = new FileReader();[m
+[31m-            reader.onload = () => {[m
+[31m-                const bytes = new Uint8Array(reader.result);[m
+[31m-                const b64 = Convert.bytesToBase64(bytes);[m
+[31m-                outputText.value = b64;[m
+[31m-    [m
+[31m-                navigator.clipboard.writeText(b64)[m
+[31m-                    .then(()=>alert("Copiato nella clipboard!"))[m
+[31m-                    .catch(e=>alert("Errore nel copiare: "+e));[m
+[31m-            }[m
+[31m-            reader.readAsArrayBuffer(file);[m
+[31m-        }[m
+[31m-    [m
+[31m-        if(type === "fromB64"){[m
+[31m-            const base64 = inputText.value.trim();[m
+[31m-            const bytes = Convert.base64ToBytes(base64);[m
+[31m-            const blob = new Blob([bytes]);[m
+[31m-            const url = URL.createObjectURL(blob);[m
+[31m-            outputText.value = url; // puoi usarlo per download o preview[m
+[31m-        }[m
+[31m-    }[m
+[31m-}[m
+[1mdiff --git a/lua/core/plugin/telescope/snippets/libs/web/js/utils.js b/lua/core/plugin/telescope/snippets/libs/web/js/utils.js[m
+[1mdeleted file mode 100644[m
+[1mindex 1ce227c..0000000[m
+[1m--- a/lua/core/plugin/telescope/snippets/libs/web/js/utils.js[m
+[1m+++ /dev/null[m
+[36m@@ -1,10 +0,0 @@[m
+[31m-function Create({tag, style = {}, props = {}, event=null}) {[m
+[31m-    const element = document.createElement(tag)[m
+[31m-    Object.assign(element.style, style)[m
+[31m-    for (let key in props) {[m
+[31m-        if (key === "class") { props[key].forEach(className => element.classList.add(className)) } [m
+[31m-        else { Object.assign(element, props) }[m
+[31m-    }[m
+[31m-    if(event){element.addEventListener(event["type"], event["func"])}[m
+[31m-    return element[m
+[31m-}[m
+[1mdiff --git a/lua/core/plugin/telescope/snippets/libs/web/js/utils.ts b/lua/core/plugin/telescope/snippets/libs/web/js/utils.ts[m
+[1mdeleted file mode 100644[m
+[1mindex ffba725..0000000[m
+[1m--- a/lua/core/plugin/telescope/snippets/libs/web/js/utils.ts[m
+[1m+++ /dev/null[m
+[36m@@ -1,50 +0,0 @@[m
+[31m-type Style = Partial<CSSStyleDeclaration>;[m
+[31m-[m
+[31m-type Props = {[m
+[31m-  [key: string]: any;[m
+[31m-  class?: string[];[m
+[31m-  id?: string;[m
+[31m-  textContent?: string;[m
+[31m-  innerHTML?: string;[m
+[31m-};[m
+[31m-[m
+[31m-type _Event = {[m
+[31m-  type: string;[m
+[31m-  func: EventListenerOrEventListenerObject;[m
+[31m-} | null;[m
+[31m-[m
+[31m-function Create({[m
+[31m-  tag,[m
+[31m-  style = {},[m
+[31m-  props = {},[m
+[31m-  event = null,[m
+[31m-}: {[m
+[31m-  tag: keyof HTMLElementTagNameMap;[m
+[31m-  style?: Style;[m
+[31m-  props?: Props;[m
+[31m-  event?: _Event;[m
+[31m-}): HTMLElement {[m
+[31m-  const element: HTMLElement = document.createElement(tag);[m
+[31m-[m
+[31m-  Object.assign(element.style, style);[m
+[31m-[m
+[31m-  for (const key in props) {[m
+[31m-    if (key === "class" && Array.isArray(props[key])) {[m
+[31m-      props[key].forEach((className: string) =>[m
+[31m-        element.classList.add(className)[m
+[31m-      );[m
+[31m-    }[m
+[31m-    else if (key === "id" && typeof props[key] === "string") {[m
+[31m-      element.id = props[key];[m
+[31m-    } else {[m
+[31m-      // @ts-ignore: Assegna proprietà dinamiche (es. textContent, innerHTML, ecc)[m
+[31m-      element[key] = props[key];[m
+[31m-    }[m
+[31m-  }[m
+[31m-[m
+[31m-  if (event) {[m
+[31m-    element.addEventListener(event.type, event.func);[m
+[31m-  }[m
+[31m-[m
+[31m-  return element;[m
+[31m-}[m
+[1mdiff --git a/lua/core/plugin/telescope/snippets/libs/web/js/www.borsaitaliana.it_FTSE_MIB.csv b/lua/core/plugin/telescope/snippets/libs/web/js/www.borsaitaliana.it_FTSE_MIB.csv[m
+[1mdeleted file mode 100644[m
+[1mindex 0f4e96b..0000000[m
+[1m--- a/lua/core/plugin/telescope/snippets/libs/web/js/www.borsaitaliana.it_FTSE_MIB.csv[m
+[1m+++ /dev/null[m
+[36m@@ -1,6 +0,0 @@[m
+[31m-﻿Name,"Max Oggi","Min Oggi","Chiusura precedente","Max Anno - Data","Min Anno - Data","Max Anno Prima","Min Anno Prima","Chiusura Anno Prima"[m
+[31m-FTSE MIB,"40.402,95","40.239,79","40.128,70","40.821,31 - 09/07/25","32.730,57 - 09/04/25","35.410,13","30.077,46","34.186,18","40.284,13","+2,35%","+11,15%","+17,26%","+40,91%","106.130,39","+0,46","18/07/25"[m
+[31m-Banco Bpm,"10,39","10,43","10,31","10,75 - 10/07/25","7,40  - 07/04/25","Euronext Milan","+3,39%","+24,52%","+64,00%","IT0005218380","BAMI","Banche"[m
+[31m-UNICREDIT,"58,35","58,35","57,80","61,56 - 10/07/25","37,03  - 02/01/25","Euronext Milan","+3,73%","+36,75%","+54,28%","IT0005239360","UCG","Banche"[m
+[31m-Generali,"47,60","47,60","47,20","57,65 - 12/05/25","41,70  - 07/04/25","Euronext Milan","-1,21%","-2,20%","+21,71%","IT0001031084","BGN","Banche"[m
+[31m-Micron Technology,"97,83","98,28","97,19","112,00 - 26/06/25","54,27  - 07/04/25","Global Equity Market","-7,48%","-3,69%","-12,21%","US5951121038","1MU"[m
+[1mdiff --git a/lua/core/remap.lua b/lua/core/remap.lua[m
+[1mindex 11bb704..350eecc 100644[m
+[1m--- a/lua/core/remap.lua[m
+[1m+++ b/lua/core/remap.lua[m
+[36m@@ -1,7 +1,7 @@[m
+ vim.g.mapleader = " "[m
+ vim.g.loaded_netrw = 1[m
+ vim.g.loaded_netrwPlugin = 1[m
+[31m-if vim.loop.os_uname().sysname == "Windows_NT" then vim.opt.clipboard = 'unnamedplus' end[m
+[32m+[m[32mif my_global_vars.isWindows then vim.opt.clipboard = 'unnamedplus' end[m
+ vim.opt.completeopt = {'menu', 'menuone', 'noselect'}[m
+ vim.opt.mouse = 'a'              [m
+ [m
+[36m@@ -18,26 +18,57 @@[m [mvim.opt.cursorline = true[m
+ vim.opt.splitbelow = true    [m
+ vim.opt.splitright = true   [m
+ [m
+[32m+[m[32m-- Manage folders[m
+[32m+[m[32mvim.o.viewoptions = "folds,cursor"[m
+[32m+[m[32mvim.cmd [[[m
+[32m+[m[32m  augroup remember_folds[m
+[32m+[m[32m    autocmd![m
+[32m+[m[32m    autocmd BufWinLeave * silent! mkview[m
+[32m+[m[32m    autocmd BufWinEnter * silent! loadview[m
+[32m+[m[32m  augroup END[m
+[32m+[m[32m]][m
+[32m+[m
+[32m+[m[32m-- Clipboard management[m[41m [m
+[32m+[m[32mvim.opt.shortmess:append("c")[m
+[32m+[m[32mvim.api.nvim_create_augroup("autoreload", { clear = true })[m
+[32m+[m[32mvim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {[m
+[32m+[m[32m    group = "autoreload",[m
+[32m+[m[32m    command = "checktime"[m
+[32m+[m[32m})[m
+[32m+[m
+ local key = vim.keymap.set[m
+ local opts = { noremap = true, silent = true }[m
+ [m
+[31m--- Packer and run script lua[m
+[31m-key("n", "<leader>so", ":luafile %<CR>", opts)[m
+[31m-key("n", "<leader><leader>ps", ":PackerSync<CR>", opts)[m
+[31m-key("n", "<leader>pu", ":PackerUpdate<CR>", opts)[m
+[32m+[m[32mlocal keymap = {[m
+[32m+[m[32m    save = {[m
+[32m+[m[32m        {"", "<C-s>", ":w!<CR>"},[m
+[32m+[m[32m        {"", "<leader>sa", ":wa!<CR>"},[m
+[32m+[m[32m        {"v", "<leader>c", '"+y'},[m
+[32m+[m[32m    },[m
+[32m+[m[32m    layout = {[m
+[32m+[m[32m        {"n", "<M-,>", "<c-w>5<"},[m
+[32m+[m[32m        {"n", "<M-.>", "<c-w>5>"},[m
+[32m+[m[32m        {"n", "<M-u>", "<C-W>-"},[m
+[32m+[m[32m        {"n", "<M-d>", "<C-W>+"},[m
+[32m+[m[32m        {"n", "<C-b>", ":NvimTreeToggle<CR>"},[m
+[32m+[m[32m    }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mfor _, group in pairs(keymap) do[m
+[32m+[m[32m    for _, k in ipairs(group) do[m
+[32m+[m[32m        key(k[1], k[2], k[3], opt)[m
+[32m+[m[32m    end[m
+[32m+[m[32mend[m
+[32m+[m
+[32m+[m[32mkey("", "<leader>123", function() vim.opt.number = true; vim.opt.relativenumber = false end, opts)[m
+[32m+[m[32mkey("", "<leader>101", function() vim.opt.relativenumber = true; vim.opt.number = false end, opts)[m
+ [m
+[31m--- Save file and files[m
+[31m-key("", "<C-s>", ":w!<CR>", ops)[m
+[31m-key("", "<leader>sa", ":wa!<CR>", opts)[m
+ [m
+[31m---Registries[m
+[32m+[m[32m--* Registries[m
+ function CleanRegistries()[m
+     local registers = { [m
+[31m-        '"', '0', '1', '2', '3', '4', '5', [m
+[31m-        '6', '7', '8', '9', 'a', 'b', 'c', [m
+[31m-        'f', 'g', 'h', 'i', 'j', [m
+[31m-        'k', 'l', 'm', 'n', 'o', 'p', [m
+[31m-        's', 'u', 'v', 'x', [m
+[32m+[m[32m        '"', '0', '1', '2', '3', '4', '5','6', '7', '8', '9', 'a', 'b', 'c',[m[41m [m
+[32m+[m[32m        'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p','s', 'u', 'v', 'x',[m[41m [m
+         'y', 'z', '*', '+'[m
+     }[m
+     for _, reg in ipairs(registers) do[m
+[36m@@ -48,53 +79,14 @@[m [mend[m
+ function CleanSearch() vim.fn.setreg("/", '') end[m
+ [m
+ [m
+[31m--- Explorer file[m
+[31m-key("n", "<C-b>", ":NvimTreeToggle<CR>", opts)[m
+[31m-[m
+[31m--- Set width and height of the current window[m
+[31m-key("n", "<M-,>", "<c-w>5<")[m
+[31m-key("n", "<M-.>", "<c-w>5>")[m
+[31m-key("n", "<M-u>", "<C-W>-")[m
+[31m-key("n", "<M-d>", "<C-W>+")[m
+[31m-[m
+[31m---Set num on rows[m
+[31m-key("", "<leader>123", function() vim.opt.number = true; vim.opt.relativenumber = false end, opts)[m
+[31m-key("", "<leader>101", function() vim.opt.relativenumber = true; vim.opt.number = false end, opts)[m
+[31m-[m
+[31m--- Clipboard management [m
+[31m-vim.opt.shortmess:append("c")[m
+[31m-vim.api.nvim_create_augroup("autoreload", { clear = true })[m
+[31m-vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {[m
+[31m-    group = "autoreload",[m
+[31m-    command = "checktime"[m
+[31m-})[m
+[31m-key("v", "<leader>c", '"+y')[m
+[31m-[m
+[31m-[m
+[31m---TABS[m
+[31m-key("", "<C-t>", ":tab split<CR>:-tabnext<CR>:q<CR>", opts)[m
+[31m-key("", "<C-t>a", ":tabonly<CR>", opts)[m
+[31m-[m
+[31m-[m
+[31m-[m
+[31m-vim.o.viewoptions = "folds,cursor"  -- salva anche i fold[m
+[31m-vim.cmd [[[m
+[31m-  augroup remember_folds[m
+[31m-    autocmd![m
+[31m-    autocmd BufWinLeave * silent! mkview[m
+[31m-    autocmd BufWinEnter * silent! loadview[m
+[31m-  augroup END[m
+[31m-]][m
+[31m-[m
+[31m-[m
+[31m---SET NUMBER KEYBOARD[m
+[32m+[m[32m--* GIT E ETC CONFIG[m
+ local keymap_with_leader_all_mode = {[m
+     ["1"] = 'require("telescope.builtin").colorscheme()',[m
+[31m-    ["2"] = 'vim.cmd("vsplit term://cmd")',[m
+[31m-    ["3"] = 'vim.cmd("vsplit term://python")',[m
+[32m+[m
+     ["5"] = 'require("telescope.builtin").git_status()',[m
+     ["6"] = 'require("telescope.builtin").git_commits()',[m
+     ["7"] = 'require("telescope.builtin").git_branches()',[m
+[32m+[m
+     ["s"] = 'require("telescope.builtin").live_grep({path_display="hidden"})',[m
+     ["crs"] = 'CleanSearch()',[m
+     ["cr"] = 'CleanRegistries()',[m
+[36m@@ -104,3 +96,15 @@[m [mfor i, v in pairs(keymap_with_leader_all_mode)[m
+ do[m
+     key("", "<leader>"..i, ":lua "..v.."<CR>", {})[m
+ end[m
+[32m+[m
+[32m+[m[32m--* Shells[m
+[32m+[m[32mlocal shell = my_global_vars.isWindows and 'term://cmd' or 'term://bin/bash'[m
+[32m+[m[32mlocal shell_py = my_global_vars.isWindows and 'term://python' or 'term://bin/python3'[m
+[32m+[m[32mlocal keymap_with_leader_all_mode = {[m
+[32m+[m[32m    ["1"] = function() vim.cmd("vsplit "..shell) end,[m
+[32m+[m[32m    ["2"] = function() vim.cmd("vsplit "..shell_py) end,[m
+[32m+[m[32m}[m
+[32m+[m[32mfor i, v in pairs(keymap_with_leader_all_mode)[m
+[32m+[m[32mdo[m
+[32m+[m[32m    key("", "<M-"..i..">", v, {})[m
+[32m+[m[32mend[m
+[1mdiff --git a/plugin/packer_compiled.lua b/plugin/packer_compiled.lua[m
+[1mindex 6ea7c49..44ed3d8 100644[m
+[1m--- a/plugin/packer_compiled.lua[m
+[1m+++ b/plugin/packer_compiled.lua[m
+[36m@@ -49,8 +49,8 @@[m [mlocal function save_profiles(threshold)[m
+ end[m
+ [m
+ time([[Luarocks path setup]], true)[m
+[31m-local package_path_str = "C:\\Users\\Utente\\AppData\\Local\\Temp\\nvim\\packer_hererocks\\2.1.1713484068\\share\\lua\\5.1\\?.lua;C:\\Users\\Utente\\AppData\\Local\\Temp\\nvim\\packer_hererocks\\2.1.1713484068\\share\\lua\\5.1\\?\\init.lua;C:\\Users\\Utente\\AppData\\Local\\Temp\\nvim\\packer_hererocks\\2.1.1713484068\\lib\\luarocks\\rocks-5.1\\?.lua;C:\\Users\\Utente\\AppData\\Local\\Temp\\nvim\\packer_hererocks\\2.1.1713484068\\lib\\luarocks\\rocks-5.1\\?\\init.lua"[m
+[31m-local install_cpath_pattern = "C:\\Users\\Utente\\AppData\\Local\\Temp\\nvim\\packer_hererocks\\2.1.1713484068\\lib\\lua\\5.1\\?.so"[m
+[32m+[m[32mlocal package_path_str = "C:\\Users\\Utente\\AppData\\Local\\Temp\\nvim\\packer_hererocks\\2.1.1741730670\\share\\lua\\5.1\\?.lua;C:\\Users\\Utente\\AppData\\Local\\Temp\\nvim\\packer_hererocks\\2.1.1741730670\\share\\lua\\5.1\\?\\init.lua;C:\\Users\\Utente\\AppData\\Local\\Temp\\nvim\\packer_hererocks\\2.1.1741730670\\lib\\luarocks\\rocks-5.1\\?.lua;C:\\Users\\Utente\\AppData\\Local\\Temp\\nvim\\packer_hererocks\\2.1.1741730670\\lib\\luarocks\\rocks-5.1\\?\\init.lua"[m
+[32m+[m[32mlocal install_cpath_pattern = "C:\\Users\\Utente\\AppData\\Local\\Temp\\nvim\\packer_hererocks\\2.1.1741730670\\lib\\lua\\5.1\\?.so"[m
+ if not string.find(package.path, package_path_str, 1, true) then[m
+   package.path = package.path .. ';' .. package_path_str[m
+ end[m
+[36m@@ -74,6 +74,11 @@[m [mend[m
+ time([[try_loadstring definition]], false)[m
+ time([[Defining packer_plugins]], true)[m
+ _G.packer_plugins = {[m
+[32m+[m[32m  LuaSnip = {[m
+[32m+[m[32m    loaded = true,[m
+[32m+[m[32m    path = "C:\\Users\\Utente\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\LuaSnip",[m
+[32m+[m[32m    url = "https://github.com/L3MON4D3/LuaSnip"[m
+[32m+[m[32m  },[m
+   catppuccin = {[m
+     loaded = true,[m
+     path = "C:\\Users\\Utente\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\catppuccin",[m
+[36m@@ -116,6 +121,16 @@[m [m_G.packer_plugins = {[m
+     path = "C:\\Users\\Utente\\AppData\\Local\\nvim-data\\site\\pack\\packer\\opt\\markdown-preview.nvim",[m
+     url = "https://github.com/iamcco/markdown-preview.nvim"[m
+   },[m
+[32m+[m[32m  ["mason-lspconfig.nvim"] = {[m
+[32m+[m[32m    loaded = true,[m
+[32m+[m[32m    path = "C:\\Users\\Utente\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\mason-lspconfig.nvim",[m
+[32m+[m[32m    url = "https://github.com/mason-org/mason-lspconfig.nvim"[m
+[32m+[m[32m  },[m
+[32m+[m[32m  ["mason.nvim"] = {[m
+[32m+[m[32m    loaded = true,[m
+[32m+[m[32m    path = "C:\\Users\\Utente\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\mason.nvim",[m
+[32m+[m[32m    url = "https://github.com/mason-org/mason.nvim"[m
+[32m+[m[32m  },[m
+   ["nvim-cmp"] = {[m
+     loaded = true,[m
+     path = "C:\\Users\\Utente\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nvim-cmp",[m
+[1mdiff --git a/snippets/snipmate/cs.snippets b/snippets/snipmate/cs.snippets[m
+[1mnew file mode 100644[m
+[1mindex 0000000..9f10a94[m
+[1m--- /dev/null[m
+[1m+++ b/snippets/snipmate/cs.snippets[m
+[36m@@ -0,0 +1,137 @@[m
+[32m+[m[32msnippet kta-debug[m
+[32m+[m[32m    //*Debug[m
+[32m+[m[32m    //non serve in produzione[m
+[32m+[m[32m    public class Logger[m
+[32m+[m[32m    {[m
+[32m+[m[32m        private static string path;[m
+[32m+[m[41m        [m
+[32m+[m[32m        public Logger (string path_filelog)[m
+[32m+[m[32m        {[m
+[32m+[m[32m            path = path_filelog;[m
+[32m+[m[32m        }[m
+[32m+[m[41m    [m
+[32m+[m[32m        public void Log(string message)[m
+[32m+[m[32m        {[m
+[32m+[m[32m            using (StreamWriter sw = new StreamWriter(path, true))[m
+[32m+[m[32m            {[m
+[32m+[m[32m                sw.WriteLine(message);[m
+[32m+[m[32m            }[m
+[32m+[m[32m        }[m
+[32m+[m[41m    [m
+[32m+[m[32m        public void Properties(string objectName, object obj)[m
+[32m+[m[32m        {[m
+[32m+[m[32m            if (obj == null)[m
+[32m+[m[32m            {[m
+[32m+[m[32m                Log(objectName+" è NULL");[m
+[32m+[m[32m                return;[m
+[32m+[m[32m            }[m
+[32m+[m[41m        [m
+[32m+[m[32m            Log("\n\n=== PROPRIETÀ DI "+objectName.ToUpper()+" ===");[m
+[32m+[m[41m            [m
+[32m+[m[32m            var properties = obj.GetType().GetProperties();[m
+[32m+[m[32m            foreach (var prop in properties)[m
+[32m+[m[32m            {[m
+[32m+[m[32m                try[m
+[32m+[m[32m                {[m
+[32m+[m[32m                    if(Convert.ToBoolean(prop.GetValue(obj)))[m
+[32m+[m[32m                    {[m
+[32m+[m[32m                        Log(prop.Name+": "+prop.GetValue(obj));[m
+[32m+[m[32m                    }[m
+[32m+[m[32m                    else{Log(prop.Name+": null");}[m
+[32m+[m[32m                }[m
+[32m+[m[32m                catch (Exception ex)[m
+[32m+[m[32m                {[m
+[32m+[m[32m                    Log(prop.Name+": [ERRORE] "+ex.Message);[m
+[32m+[m[32m                }[m
+[32m+[m[32m            }[m
+[32m+[m[32m        }[m
+[32m+[m[32m    }[m
+[32m+[m[32msnippet kta-main[m
+[32m+[m[32m    //! Creare Pagina Help[m
+[32m+[m[32m    //. Classi aggiuntive[m
+[32m+[m[41m    [m
+[32m+[m[32m    //. Logger[m
+[32m+[m[32m    //TODO da migliorare Properties[m
+[32m+[m[32m    //.     - void Log(string msg) -> scrivi delle stringhe in un file[m
+[32m+[m[32m    //.     - void Properties(string idetifier, string msg) -> scrivi delle stringhe in un file[m
+[32m+[m[41m    [m
+[32m+[m[41m    [m
+[32m+[m[32m    //. Parser[m
+[32m+[m[32m    //.    - JSON___Str_Str(Dictonary(<string>, <string>))[m
+[32m+[m[32m    //.    - JSON___arrayStr(List<string>)[m
+[32m+[m[32m    //! ...........................................................................................[m
+[32m+[m[41m    [m
+[32m+[m[32m    using System;[m
+[32m+[m[32m    using System.Globalization;[m
+[32m+[m[32m    using System.Data;[m
+[32m+[m[32m    using Agility.Server.Scripting.ScriptAssembly;[m
+[32m+[m[32m    using System.IO;[m
+[32m+[m[32m    using System.Collections.Generic;[m
+[32m+[m[41m    [m
+[32m+[m[32m    namespace MyValidator[m
+[32m+[m[32m    {[m
+[32m+[m[32m        //*In caso servisse gestire un errore in un Validation Handler[m
+[32m+[m[32m        public class ReturnValues[m
+[32m+[m[32m        {[m
+[32m+[m[32m            public string Fieldname;[m
+[32m+[m[32m            public string ErrorDescription;[m
+[32m+[m[32m        }[m
+[32m+[m[41m    [m
+[32m+[m[32m        public class Validator[m
+[32m+[m[32m        {[m
+[32m+[m[41m    [m
+[32m+[m[32m            [StartMethod][m
+[32m+[m[32m            public void Main(ScriptParameters sp)[m
+[32m+[m[32m            {[m
+[32m+[m[32m                //[m
+[32m+[m[32m                // Scrivi Qui il tuo codice[m
+[32m+[m[32m                //[m
+[32m+[m[32m            }[m
+[32m+[m[41m    [m
+[32m+[m[41m    [m
+[32m+[m[32m            //*In caso servisse gestire Un Validator[m
+[32m+[m[32m            public static ReturnValues Validation(string json)[m
+[32m+[m[32m            {[m
+[32m+[m[32m            }[m
+[32m+[m[41m    [m
+[32m+[m[32m        }[m
+[32m+[m[32m    }[m
+[32m+[m[32msnippet kta-parser[m
+[32m+[m[32m    public class Parser[m
+[32m+[m[32m    {[m
+[32m+[m[32m        public string[] JSON___Str_Str(string json)[m[41m [m
+[32m+[m[32m        //  {[m
+[32m+[m[32m        //    "...": "...",[m
+[32m+[m[32m        //    ...[m
+[32m+[m[32m        //  }[m[41m [m
+[32m+[m[32m        {[m
+[32m+[m[32m            var lista = new List<string>();[m
+[32m+[m[32m            bool inQuotes = false;[m
+[32m+[m[32m            var current = "";[m
+[32m+[m[32m            json = json.Trim().TrimStart('{').TrimEnd('}');[m
+[32m+[m[32m            for (int i = 0; i < json.Length; i++)[m
+[32m+[m[32m            {[m
+[32m+[m[32m                char c = json[i];[m
+[32m+[m[32m                if (c == '\"') {inQuotes = !inQuotes;}[m
+[32m+[m[32m                if (c == ',' && !inQuotes)[m
+[32m+[m[32m                {[m
+[32m+[m[32m                    lista.Add(current.ToString().Trim());[m
+[32m+[m[32m                    current = "";[m
+[32m+[m[32m                }[m
+[32m+[m[32m                else{ current = current + c;}[m
+[32m+[m[32m            }[m
+[32m+[m[32m            if (current.Length > 0){lista.Add(current.ToString().Trim());}[m
+[32m+[m[32m            var result = new List<string>();[m
+[32m+[m[32m            foreach (var pair in lista)[m
+[32m+[m[32m            {[m
+[32m+[m[32m                var parts = pair.Split(new[] { ':' }, 2);[m
+[32m+[m[32m                if (parts.Length == 2)[m
+[32m+[m[32m                {[m
+[32m+[m[32m                    string key = parts[0].Trim().Trim('\"');[m
+[32m+[m[32m                    string value = parts[1].Trim().Trim('\"');[m
+[32m+[m[32m                    result.Add(key+" "+value);[m
+[32m+[m[32m                }[m
+[32m+[m[32m            }[m
+[32m+[m[32m            return result.ToArray();[m
+[32m+[m[32m        }[m
+[32m+[m[32m    }[m
+[1mdiff --git a/snippets/snipmate/css.snippets b/snippets/snipmate/css.snippets[m
+[1mnew file mode 100644[m
+[1mindex 0000000..67c20b0[m
+[1m--- /dev/null[m
+[1m+++ b/snippets/snipmate/css.snippets[m
+[36m@@ -0,0 +1,25 @@[m
+[32m+[m[32msnippet animations[m
+[32m+[m[32m    @keyframes ToRight {[m
+[32m+[m[32m        0% { transform: translateX(0); }[m
+[32m+[m[32m        100% { transform: translateX(2%); }[m
+[32m+[m[32m    }[m
+[32m+[m[32m    @keyframes ToLeft {[m
+[32m+[m[32m        0% { transform: translateX(0); }[m
+[32m+[m[32m        100% { transform: translateX(-2%); }[m
+[32m+[m[32m    }[m
+[32m+[m[32m    @keyframes ToTop {[m
+[32m+[m[32m        0% { transform: translateY(0); }[m
+[32m+[m[32m        100% { transform: translateY(-2%); }[m
+[32m+[m[32m    }[m
+[32m+[m[32m    @keyframes ToBottom {[m
+[32m+[m[32m        0% { transform: translateY(0); }[m
+[32m+[m[32m        100% { transform: translateY(2%); }[m
+[32m+[m[32m    }[m
+[32m+[m[32m    @keyframes View {[m
+[32m+[m[32m        0% { opacity:0}[m
+[32m+[m[32m        100% { opacity:1}[m
+[32m+[m[32m    }[m
+[32m+[m[32m    @keyframes Hidden {[m
+[32m+[m[32m        0% { opacity:1}[m
+[32m+[m[32m        100% { opacity:0}[m
+[32m+[m[32m    }[m
+[1mdiff --git a/snippets/snipmate/html.snippets b/snippets/snipmate/html.snippets[m
+[1mnew file mode 100644[m
+[1mindex 0000000..05252e0[m
+[1m--- /dev/null[m
+[1m+++ b/snippets/snipmate/html.snippets[m
+[36m@@ -0,0 +1,18 @@[m
+[32m+[m[32msnippet html[m
+[32m+[m[32m    <!DOCTYPE html>[m
+[32m+[m[32m    <html lang="en">[m
+[32m+[m[32m      <head>[m
+[32m+[m[32m        <meta charset="UTF-8">[m
+[32m+[m[32m        <meta name="viewport" content="width=device-width, initial-scale=1.0">[m
+[32m+[m[32m        <meta http-equiv="X-UA-Compatible" content="ie=edge">[m
+[32m+[m[32m        <title>My Website</title>[m
+[32m+[m[32m        <link rel="stylesheet" href="./style.css">[m
+[32m+[m[32m        <link rel="icon" href="./favicon.ico" type="image/x-icon">[m
+[32m+[m[32m      </head>[m
+[32m+[m[32m      <body>[m
+[32m+[m[32m        <main>[m
+[32m+[m[32m            <h1>Welcome to My Website</h1>[m[41m  [m
+[32m+[m[32m        </main>[m
+[32m+[m[32m        <script src="index.js"></script>[m
+[32m+[m[32m      </body>[m
+[32m+[m[32m    </html>[m
+[1mdiff --git a/snippets/snipmate/javascript.snippets b/snippets/snipmate/javascript.snippets[m
+[1mnew file mode 100644[m
+[1mindex 0000000..e174f51[m
+[1m--- /dev/null[m
+[1m+++ b/snippets/snipmate/javascript.snippets[m
+[36m@@ -0,0 +1,63 @@[m
+[32m+[m[32msnippet kta-form[m
+[32m+[m[32m    class myForm {[m
+[32m+[m[32m        constructor(type){[m
+[32m+[m[32m            this.type = type[m
+[32m+[m[32m        }[m
+[32m+[m[32m        public get(name){[m
+[32m+[m[32m            if(this.type == "control"){[m
+[32m+[m[32m                return Forms.SDK.GetFormControlValue(name)[m
+[32m+[m[32m            }[m
+[32m+[m[32m            else if(this.type == "variable"){[m
+[32m+[m[32m                return Forms.SDK.GetFormVariableValue(name)[m
+[32m+[m[32m            }[m
+[32m+[m[32m            else{ return new Error(`type = [control, variable] not ${this.type}`) }[m
+[32m+[m[32m        }[m
+[32m+[m[32m        public set(name, value){[m
+[32m+[m[32m            if(this.type == "control"){[m
+[32m+[m[32m                return Forms.SDK.SetFormControlValue(name, value)[m
+[32m+[m[32m            }[m
+[32m+[m[32m            else if(this.type == "variable"){[m
+[32m+[m[32m                return Forms.SDK.SetFormVariableValue(name, value)[m
+[32m+[m[32m            }[m
+[32m+[m[32m            else{ return new Error(`type = [control, variable] not ${this.type}`) }[m
+[32m+[m[32m        }[m
+[32m+[m[32m    }[m
+[32m+[m[32msnippet download-file[m
+[32m+[m[32m    function downloadFile({[m
+[32m+[m[32m        filename,[m[41m [m
+[32m+[m[32m        content,[m
+[32m+[m[32m        contentType[m
+[32m+[m[32m    }) {[m
+[32m+[m[32m        const blob = new Blob([content], { type: contentType }); // Cambia il tipo se necessario[m
+[32m+[m[32m        const url = URL.createObjectURL(blob); // Crea un URL per il blob[m
+[32m+[m[41m    [m
+[32m+[m[32m        const a = document.createElement('a');[m
+[32m+[m[32m        a.href = url;[m
+[32m+[m[32m        a.download = filename; // Assegna il nome del file[m
+[32m+[m[41m    [m
+[32m+[m[32m        document.body.appendChild(a);[m
+[32m+[m[32m        a.click();[m[41m [m
+[32m+[m[32m        document.body.removeChild(a);[m
+[32m+[m[41m    [m
+[32m+[m[32m        URL.revokeObjectURL(url);[m
+[32m+[m[32m    }[m
+[32m+[m[32msnippet utils[m
+[32m+[m[32m    function Create({tag, style = {}, props = {}, event=null}) {[m
+[32m+[m[32m        const element = document.createElement(tag)[m
+[32m+[m[32m        Object.assign(element.style, style)[m
+[32m+[m[32m        for (let key in props) {[m
+[32m+[m[32m            if (key === "class") { props[key].forEach(className => element.classList.add(className)) }[m[41m [m
+[32m+[m[32m            else { Object.assign(element, props) }[m
+[32m+[m[32m        }[m
+[32m+[m[32m        if(event){element.addEventListener(event["type"], event["func"])}[m
+[32m+[m[32m        return element[m
+[32m+[m[32m    }[m
+[32m+[m[32msnippet class[m
+[32m+[m[32m    class MyClass {[m
+[32m+[m[32m        constructor(){[m
+[32m+[m
+[32m+[m[32m        }[m
+[32m+[m[32m        m1(){}[m
+[32m+[m[32m        m1(){}[m
+[32m+[m[32m        m1(){}[m
+[32m+[m[32m    }[m
+[1mdiff --git a/snippets/snipmate/lua.snippets b/snippets/snipmate/lua.snippets[m
+[1mnew file mode 100644[m
+[1mindex 0000000..2b47981[m
+[1m--- /dev/null[m
+[1m+++ b/snippets/snipmate/lua.snippets[m
+[36m@@ -0,0 +1,14 @@[m
+[32m+[m[32msnippet class[m
+[32m+[m[32m    local Obj = {}[m
+[32m+[m[32m    Obj.__index = Obj[m
+[32m+[m[41m    [m
+[32m+[m[32m    --constructor[m
+[32m+[m[32m    function Obj:new(arg)[m[41m [m
+[32m+[m[32m        return setmetatable({[m
+[32m+[m[32m            arg = arg[m
+[32m+[m[41m    [m
+[32m+[m[41m    [m
+[32m+[m[32m        }, self)[m
+[32m+[m[32m    end[m
+[32m+[m[41m    [m
+[32m+[m[32m    function Obj:method1() end[m
+[1mdiff --git a/snippets/snipmate/python.snippets b/snippets/snipmate/python.snippets[m
+[1mnew file mode 100644[m
+[1mindex 0000000..df52ad5[m
+[1m--- /dev/null[m
+[1m+++ b/snippets/snipmate/python.snippets[m
+[36m@@ -0,0 +1,43 @@[m
+[32m+[m[32msnippet type[m
+[32m+[m[32m    from dataclasses import dataclass[m
+[32m+[m[32m    from typing import Literal[m
+[32m+[m[41m    [m
+[32m+[m[32m    @dataclass[m
+[32m+[m[32m    class Investment:[m
+[32m+[m[32m        start: int[m
+[32m+[m[32m        tasse: Literal["STATO", "PRIVATO"][m
+[32m+[m[41m        [m
+[32m+[m[32m        def __post_init__(self):[m
+[32m+[m[32m            errorDescription = "oggetto non valido"[m
+[32m+[m[41m            [m
+[32m+[m[32m            if not all(isinstance(v, str) for v in (self.isin, self.scadenza, self.ultima_cedola)):[m
+[32m+[m[32m                raise TypeError(errorDescription)[m
+[32m+[m[41m    [m
+[32m+[m[32m            if not all(isinstance(v, float) for v in ([m
+[32m+[m[32m                self.tasso_lordo,[m
+[32m+[m[32m                self.valore_nominale,[m
+[32m+[m[32m                self.prezzo,[m
+[32m+[m[32m                self.costi_di_gestione,[m
+[32m+[m[32m                self.start_con_cambio_valuta,[m
+[32m+[m[32m            )):[m
+[32m+[m[32m                raise TypeError(errorDescription)[m
+[32m+[m[41m    [m
+[32m+[m[32m            if not isinstance(self.valore_nominale_euro, bool):[m
+[32m+[m[32m                raise TypeError(errorDescription)[m
+[32m+[m[32msnippet cmd[m
+[32m+[m[32m    from argparse import ArgumentParser[m
+[32m+[m[41m    [m
+[32m+[m[32m    cmd = ArgumentParser([m
+[32m+[m[32m        prog="<name_tool>",[m
+[32m+[m[32m        description="",[m
+[32m+[m[32m    )[m
+[32m+[m[41m    [m
+[32m+[m[32m    cmd.add_argument([m
+[32m+[m[32m            "-","--",[m
+[32m+[m[32m            choices=[],[m
+[32m+[m[32m            action="",[m
+[32m+[m[32m            help="",[m
+[32m+[m[32m            required=False[m
+[32m+[m[32m    )[m
+[32m+[m[41m    [m
+[32m+[m[32m    args = cmd.parse_args()[m
+[1mdiff --git a/snippets/snipmate/xml.snippets b/snippets/snipmate/xml.snippets[m
+[1mnew file mode 100644[m
+[1mindex 0000000..e69de29[m
+[1mdiff --git a/snippets/vscode/python.json b/snippets/vscode/python.json[m
+[1mnew file mode 100644[m
+[1mindex 0000000..9d1fee4[m
+[1m--- /dev/null[m
+[1m+++ b/snippets/vscode/python.json[m
+[36m@@ -0,0 +1,15 @@[m
+[32m+[m[32m{[m
+[32m+[m[32m  "print": {[m
+[32m+[m[32m    "prefix": "print",[m
+[32m+[m[32m    "body": ["print(${1:msg})"],[m
+[32m+[m[32m    "description": "Stampa un messaggio"[m
+[32m+[m[32m  },[m
+[32m+[m[32m  "forloop": {[m
+[32m+[m[32m    "prefix": "forloop",[m
+[32m+[m[32m    "body": [[m
+[32m+[m[32m      "for ${1:i} in range(${2:10}):",[m
+[32m+[m[32m      "\tprint(${3:i})"[m
+[32m+[m[32m    ],[m
+[32m+[m[32m    "description": "Ciclo for Python"[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[1mdiff --git a/test.py b/test.py[m
+[1mnew file mode 100644[m
+[1mindex 0000000..e69de29[m

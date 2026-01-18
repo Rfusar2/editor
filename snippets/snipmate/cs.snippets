@@ -1,0 +1,237 @@
+snippet sql
+    using System;
+    using System.Data.SqlClient;
+    
+    class Program
+    {
+        static void Main()
+        {
+            string connectionString = @"Server=localhost\SQLEXPRESS;Database=TestDBScript;Integrated Security=true;"; // connessione al server
+    
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string createTableQuery = @"
+                    CREATE TABLE Persone (
+                        ID INT PRIMARY KEY,
+                        Nome NVARCHAR(50),
+                        Cognome NVARCHAR(50),
+                        DataNascita DATETIME
+                    )";
+                
+                using (SqlCommand cmd = new SqlCommand(createTableQuery, conn))
+                {
+                    cmd.ExecuteNonQuery();
+                    Console.WriteLine("Tabella creata!");
+                }
+            }
+        }
+    }
+snippet service
+    using System;
+    using System.ServiceProcess;
+    using System.Diagnostics;
+    using System.Threading;
+    
+    public class MyService : ServiceBase
+    {
+        private Thread workerThread;
+    
+        public MyService()
+        {
+            this.ServiceName = "MyCustomService";
+        }
+    
+        protected override void OnStart(string[] args)
+        {
+            // Avvia il lavoro su un thread separato
+            workerThread = new Thread(DoWork);
+            workerThread.IsBackground = true;
+            workerThread.Start();
+        }
+    
+        private void DoWork()
+        {
+        
+            while (true)
+            {
+                var exe = new ProcessStartInfo()
+                {
+                    FileName = "powershell.exe",
+                    Arguments = @"-noprofile -executionpolicy bypass -file C:\Users\Utente\Desktop\MyLibrary\utils_powershell\test-service\service\service.ps1",
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    CreateNoWindow = true
+                };
+        
+                using (var process = Process.Start(exe))
+                {
+                    string output = process.StandardOutput.ReadToEnd();
+                    string errors = process.StandardError.ReadToEnd();
+        
+                    if (!string.IsNullOrEmpty(output)){}
+                    if (!string.IsNullOrEmpty(errors)){}
+        
+                    process.WaitForExit();
+                }
+        
+                Thread.Sleep(30000); // 30 secondi
+            }
+        }
+    
+        protected override void OnStop()
+        {
+            // Eventuale cleanup
+            if (workerThread != null && workerThread.IsAlive)
+                workerThread.Abort(); // oppure usare un flag di cancellazione più sicuro
+        }
+    
+        public static void Main()
+        {
+            ServiceBase.Run(new MyService());
+        }
+    }
+snippet kta-debug
+    //*Debug
+    //non serve in produzione
+    public class Logger
+    {
+        private static string path;
+        
+        public Logger (string path_filelog)
+        {
+            path = path_filelog;
+        }
+    
+        public void Log(string message)
+        {
+            using (StreamWriter sw = new StreamWriter(path, true))
+            {
+                sw.WriteLine(message);
+            }
+        }
+        public void LogBinary(byte[] data)
+        {
+            using (var bw = new BinaryWriter(File.Open(path, FileMode.Append)))
+            {
+                bw.Write(data);
+            }
+        }
+        public void Properties(string objectName, object obj)
+        {
+            if (obj == null)
+            {
+                Log(objectName+" è NULL");
+                return;
+            }
+        
+            Log("\n\n=== PROPRIETÀ DI "+objectName.ToUpper()+" ===");
+            
+            var properties = obj.GetType().GetProperties();
+            foreach (var prop in properties)
+            {
+                try
+                {
+                    if(Convert.ToBoolean(prop.GetValue(obj)))
+                    {
+                        Log(prop.Name+": "+prop.GetValue(obj));
+                    }
+                    else{Log(prop.Name+": null");}
+                }
+                catch (Exception ex)
+                {
+                    Log(prop.Name+": [ERRORE] "+ex.Message);
+                }
+            }
+        }
+    }
+snippet kta-main
+    //! Creare Pagina Help
+    //. Classi aggiuntive
+    
+    //. Logger
+    //TODO da migliorare Properties
+    //.     - void Log(string msg) -> scrivi delle stringhe in un file
+    //.     - void Properties(string idetifier, string msg) -> scrivi delle stringhe in un file
+    
+    
+    //. Parser
+    //.    - JSON___Str_Str(Dictonary(<string>, <string>))
+    //.    - JSON___arrayStr(List<string>)
+    //! ...........................................................................................
+    
+    using System;
+    using System.Globalization;
+    using System.Data;
+    using Agility.Server.Scripting.ScriptAssembly;
+    using System.IO;
+    using System.Collections.Generic;
+    
+    namespace MyValidator
+    {
+        //*In caso servisse gestire un errore in un Validation Handler
+        public class ReturnValues
+        {
+            public string Fieldname;
+            public string ErrorDescription;
+        }
+    
+        public class Validator
+        {
+    
+            [StartMethod]
+            public void Main(ScriptParameters sp)
+            {
+                //
+                // Scrivi Qui il tuo codice
+                //
+            }
+    
+    
+            //*In caso servisse gestire Un Validator
+            public static ReturnValues Validation(string json)
+            {
+            }
+    
+        }
+    }
+snippet kta-parser
+    public class Parser
+    {
+        public string[] JSON___Str_Str(string json) 
+        //  {
+        //    "...": "...",
+        //    ...
+        //  } 
+        {
+            var lista = new List<string>();
+            bool inQuotes = false;
+            var current = "";
+            json = json.Trim().TrimStart('{').TrimEnd('}');
+            for (int i = 0; i < json.Length; i++)
+            {
+                char c = json[i];
+                if (c == '\"') {inQuotes = !inQuotes;}
+                if (c == ',' && !inQuotes)
+                {
+                    lista.Add(current.ToString().Trim());
+                    current = "";
+                }
+                else{ current = current + c;}
+            }
+            if (current.Length > 0){lista.Add(current.ToString().Trim());}
+            var result = new List<string>();
+            foreach (var pair in lista)
+            {
+                var parts = pair.Split(new[] { ':' }, 2);
+                if (parts.Length == 2)
+                {
+                    string key = parts[0].Trim().Trim('\"');
+                    string value = parts[1].Trim().Trim('\"');
+                    result.Add(key+" "+value);
+                }
+            }
+            return result.ToArray();
+        }
+    }

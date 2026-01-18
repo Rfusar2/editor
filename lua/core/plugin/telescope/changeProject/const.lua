@@ -1,0 +1,36 @@
+local M = {}
+
+local home = "C:/Users/nemes/Desktop/WORK"
+
+if my_global_vars.isWindows then
+    M.projects = {
+        ["Lessons"] = "C:/Users//Desktop/Lessons",
+        
+        ["Update Nvim"] = "C:/Users/nemes/AppData/Local/nvim",
+        ["Update Nvim-Data"] = "C:/Users/nemes/AppData/Local/nvim-data",
+        
+        ["WORK - Variables"] = "C:/Users/nemes/Desktop/VARS",
+        ["WORK - DoValue - Document Generator"] = home .. "/DOVALUE",
+        ["WORK - Fasdac - KTA"] = home .. "/FASDAC",
+        ["API  - zoho-odoo"] = home .. "/NEMESIS/zoho-odoo",
+
+        ["FUNC - Add New Path"] = "",
+        ["FUNC - Add New Snippet"] = "",
+        ["FUNC - Add New Script"] = "",
+    }
+
+
+else
+    M.projects = {
+        ["LIB - nvim"] = "/home/riccardo/.config/nvim",
+        ["My Libraries"] = "/home/riccardo/Scrivania/MyLib",
+        ["SYS - Copy Current Directory"] = "",
+        ["FUNC - Add New Path"] = "",
+        ["FUNC - Add New Snippet"] = "",
+        ["FUNC - Add New Script"] = "",
+        ["FUNC - Copy Current Directory"] = "",
+    }
+end
+
+
+return M

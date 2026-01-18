@@ -1,0 +1,29 @@
+==========================================================================================
+*RF-golang-mongoDB*
+
+libs:
+	"go.mongodb.org/mongo-driver/mongo/options"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/bson"
+
+bson:
+    D: An ordered representation of a BSON document (slice)
+    M: An unordered representation of a BSON document (map)
+    A: An ordered representation of a BSON array
+    E: A single element inside a D type
+
+omitempty
+    The field will not be marshaled if it is set to the zero value corresponding to the field type.
+    To globally prevent the driver from marshaling fields set to a zero value, you can set the OmitEmpty BSON option.
+
+minsize
+    If the field is type int64, uint, uint32, or uint64 and the value of the field can fit in a signed int32, 
+    the field will be serialized as a BSON int32 rather than a BSON int64. 
+    If the value can't fit in a signed int32, this tag is ignored.
+
+truncate
+    If the field type is a non-float numeric type, BSON doubles unmarshalled into that field 
+    will be truncated at the decimal point.
+
+inline
+    If the field type is a struct or map field, the field will be flattened when marshalling and unflattened when unmarshalling.

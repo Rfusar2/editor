@@ -1,0 +1,15 @@
+{
+  "print": {
+    "prefix": "print",
+    "body": ["print(${1:msg})"],
+    "description": "Stampa un messaggio"
+  },
+  "forloop": {
+    "prefix": "forloop",
+    "body": [
+      "for ${1:i} in range(${2:10}):",
+      "\tprint(${3:i})"
+    ],
+    "description": "Ciclo for Python"
+  }
+}
