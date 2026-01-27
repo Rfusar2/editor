@@ -4,6 +4,7 @@ RF-custom_config_menu	custom_config_menu.txt	/*RF-custom_config_menu*
 RF-custom_snippets	help_manual_custom_2.txt	/*RF-custom_snippets*
 RF-docs_csc.exe	help_manual_custom_2.txt	/*RF-docs_csc.exe*
 RF-folders	help_manual_custom.txt	/*RF-folders*
+RF-gcloud	gcloud.txt	/*RF-gcloud*
 RF-golang-mongoDB	golang.txt	/*RF-golang-mongoDB*
 RF-help_manual_custom_1	help_manual_custom.txt	/*RF-help_manual_custom_1*
 RF-help_manuale_custom_2	help_manual_custom_2.txt	/*RF-help_manuale_custom_2*

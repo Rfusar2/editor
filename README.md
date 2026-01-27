@@ -5,14 +5,8 @@
 
 ### Features
 
-- [x]  [Chess Docs](lua\core\plugin\telescope\docs\scacchi\README.md)
 - [x]  [Some shortcut](lua/core/help.lua)
 - [x]  Lsp Server Python, [here](lua/core/lsp_server/pyright.lua)
-
-### New Features
-
-- [ ] Wrapper for debugger, [here](lua/core/debugger/init.lua)
-- [ ] Plug-in for handling protocols SMTP/IMAP [tool email](lua/core/plugin/email/README.md) 
 
 <details>
     <summary>Consts of a correct configuration (CUSTOM MENU)</summary>
@@ -31,6 +25,8 @@
     TASKS_EDIT:             "C:/Users/Utente/AppData/Local/nvim/lua/core/ricordi/ricordi.md"
 
 </details>
+
+## WINDOWS
 
 ## Extra Notes
 

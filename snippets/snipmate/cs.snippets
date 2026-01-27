@@ -235,3 +235,20 @@ snippet kta-parser
             return result.ToArray();
         }
     }
+snippet kta-start
+    using System;
+    using Agility.Server.Scripting.ScriptAssembly;
+    
+    namespace MyValidator
+    {
+        public class Validator
+        {
+            [StartMethod]
+            public void Main(ScriptParameters sp)
+            {
+                //
+                // Scrivi Qui il tuo codice
+                //
+            }
+        }
+    }

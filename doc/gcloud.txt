@@ -1,0 +1,10 @@
+==========================================================================================
+*RF-gcloud*
+
+for build an image
+
+gcloud builds submit --tag=<path for push>
+
+************ example ****************
+
+    gcloud builds submit --tag=europe-west1-docker.pkg.dev/<project-id>/<repo-name>/<name-image>

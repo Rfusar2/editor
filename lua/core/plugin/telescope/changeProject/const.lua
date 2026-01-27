@@ -12,6 +12,7 @@ if my_global_vars.isWindows then
         ["WORK - Variables"] = "C:/Users/nemes/Desktop/VARS",
         ["WORK - DoValue - Document Generator"] = home .. "/DOVALUE",
         ["WORK - Fasdac - KTA"] = home .. "/FASDAC",
+        ["WORK - PRELIOS - KTA"] = home .. "/PRELIOS",
         ["API  - zoho-odoo"] = home .. "/NEMESIS/zoho-odoo",
 
         ["FUNC - Add New Path"] = "",
