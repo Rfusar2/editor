@@ -7,8 +7,8 @@ M.Server_LSP.__index = M.Server_LSP
 function M.Server_LSP:new()
     return setmetatable({
         servers = {
-            python = { patterns = { "*.py" }, name = "pyright", exec = "/pyright-langserver.cmd" },
-            typescript = { patterns = { "*.js", "*.ts" }, name = "ts_ls", exec = "/typescript-language-server.cmd" },
+            python = { patterns = { "*.py" }, name = "basedpyright", exec = "/basedpyright-langserver.cmd" },
+            --golang = { patterns = { "*.go", }, name = "golangci-lint-langserver", exec = "/golangci-lint-langserver.cmd" },
         },
     }, self)
 end
@@ -25,17 +25,20 @@ function M.Server_LSP:start(server_name, cmd)
 end
 
 --* active
-function M.Server_LSP:active()
+function M.Server_LSP:active(_name)
     local home = vim.fn.stdpath("data") .. "/mason/bin"
-    for _, server in pairs(self.servers) do
-        vim.api.nvim_create_autocmd("BufEnter", {
-            pattern = server.patterns,
-            callback = function()
-                if #vim.lsp.get_clients() == 0 then
-                    self:start(server.name, home .. server.exec)
-                end
-            end,
-        })
+    for name, server in pairs(self.servers) do
+        print(name, _name)
+        if name == _name then
+            vim.api.nvim_create_autocmd("BufEnter", {
+                pattern = server.patterns,
+                callback = function()
+                    if #vim.lsp.get_clients() == 0 then
+                        self:start(server.name, home .. server.exec)
+                    end
+                end,
+            })
+        end
     end
 end
 

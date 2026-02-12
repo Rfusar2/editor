@@ -23,13 +23,10 @@ cmp.setup({
 
 require("mason").setup()
 
-local SERVERS = require("core.lsp_server.server").Server_LSP:new()
-
---SERVERS:active()
-
+_G.HELPS = require("core.lsp_server.server").Server_LSP:new()
 
 --! Stato LSP
-function vim.g.StopLSP(type)
+function vim.g.StopLSP()
     for _, client in ipairs(vim.lsp.get_clients()) do
         client.stop()
     end

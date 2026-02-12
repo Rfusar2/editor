@@ -4,7 +4,7 @@ local n = require("core.networks")
 local WINDOWS = {"choco", "python", "npm"}
 local LINUX = {"wget", "python3", "npm"}
 
-local dep = my_global_vars.isWindows and WINDOWS or LINUX
+local dep = _G.my_global_vars.isWindows and WINDOWS or LINUX
 
 _G.custom_editor_status = {
     ShowPlugs = function () 

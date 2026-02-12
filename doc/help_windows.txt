@@ -2,3 +2,32 @@
 *RF-reset-Windows-license*
 
 slmgr /rearm
+
+
+==========================================================================================
+*RF-docs_csc.exe*
+
+you can find the tool in "C:\Windows\Microsoft.NET\Framework\v4.0.30319\csc.exe"
+and use it for generating dlls or exe like:
+
+for DLL -> csc.exe /target:library /out:$dll $source
+for exe -> csc.exe /target:exe /out:$exe $source
+
+
+==========================================================================================
+*RF-custom-powershell*    helper powershell
+
+an example of a powershell parameter
+```
+[Parameter(
+    Mandatory = $false,
+    Position = 0,
+    HelpMessage = "Specifica l'azione da eseguire.",
+    ValueFromPipeline = $false,
+    ValueFromPipelineByPropertyName = $true
+)]
+[ValidateSet("Start", "Stop", "Restart", "Status")]
+[Alias("Act")]
+[string]$Action
+```
+

@@ -1,7 +1,7 @@
 vim.g.mapleader = " "
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-if my_global_vars.isWindows then vim.opt.clipboard = 'unnamedplus' end
+if _G.my_global_vars.isWindows then vim.opt.clipboard = 'unnamedplus' end
 vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
 vim.opt.mouse = 'a'              
 
@@ -98,8 +98,8 @@ do
 end
 
 --* Shells
-local shell = my_global_vars.isWindows and 'term://cmd' or 'term://bin/bash'
-local shell_py = my_global_vars.isWindows and 'term://python' or 'term://bin/python3'
+local shell = _G.my_global_vars.isWindows and 'term://cmd' or 'term://bin/bash'
+local shell_py = _G.my_global_vars.isWindows and 'term://python' or 'term://bin/python3'
 local keymap_with_leader_all_mode = {
     ["1"] = function() vim.cmd("vsplit "..shell) end,
     ["2"] = function() vim.cmd("vsplit "..shell_py) end,

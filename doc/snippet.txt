@@ -1,0 +1,36 @@
+==========================================================================================
+*RF-custom_snippets*
+
+custom_snippets
+
+filetype
+
+    cs:
+        - sql
+        - service
+        - kta-main
+        - kta-debug
+        - kta-parser
+        - kta-start
+
+    javascript:
+        - kta-form
+        - download-file
+        - utils
+        - class
+
+    html:
+        - html
+
+    ps1:
+        - service
+
+    python:
+        - type
+        - cmd
+
+    css:
+        - animations
+
+    lua:
+        - class

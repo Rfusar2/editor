@@ -1,8 +1,8 @@
 local key = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
-local plug = my_global_vars.isWindows and "/csvlens.nvim/" or "/site/pack/packer/start/csvlens.nvim/"
-local path = my_global_vars.data .. plug
+local plug = _G.my_global_vars.isWindows and "/csvlens.nvim/" or "/site/pack/packer/start/csvlens.nvim/"
+local path = _G.my_global_vars.data .. plug
 
 require("csvlens").setup({
     direction = "float",
