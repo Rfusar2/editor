@@ -41,8 +41,3 @@ git stash list                            get the list of the stashes
 git stash applay stash@{1}                example for applaying
 git stash drop stash@{1}                  example for deleting
 git stash clear                           delete all stashes
-
-
-
-SEE ALSO
-    :h user-commands

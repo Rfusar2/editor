@@ -17,10 +17,6 @@ require("telescope").setup {
           actions.close(prompt_bufnr)
           MyCustomMenu()
         end,
-        ["<C-c>"] = function(prompt_bufnr)
-          actions.close(prompt_bufnr)
-          builtin.colorscheme()
-        end,
         ["<C-f>"] = function(prompt_bufnr)
             actions.close(prompt_bufnr)
             builtin.find_files()

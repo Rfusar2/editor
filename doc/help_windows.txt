@@ -15,7 +15,7 @@ for exe -> csc.exe /target:exe /out:$exe $source
 
 
 ==========================================================================================
-*RF-custom-powershell*    helper powershell
+*RF-custom-powershell*
 
 an example of a powershell parameter
 ```
@@ -31,3 +31,25 @@ an example of a powershell parameter
 [string]$Action
 ```
 
+
+
+==========================================================================================
+*RF-GUI-System*
+
+compmgmt.msc: Gestione computer
+devmgmt.msc: Gestione dispositivi
+diskmgmt.msc: Gestione disco
+secpol.msc: Criteri di sicurezza locali
+gpedit.msc: Editor dei criteri di gruppo
+services.msc: Servizi
+eventvwr.msc: Visualizzatore eventi
+perfmon.msc: Monitoraggio delle prestazioni
+taskschd.msc: Utilità di pianificazione
+
+ms-settings:<>
+
+per trovare altri:
+    cd cd C:\WINDOWS\system32 && dir *.msc
+
+
+msinfo32 -> per vedere i dettagli del pc

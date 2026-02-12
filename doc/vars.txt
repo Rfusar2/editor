@@ -1,0 +1,18 @@
+==========================================================================================
+CUSTOM VARS:
+
+
+    my_global_vars
+        open_url(url)
+        restart_nvim()
+        log(obj)
+        studies(keymap) //TODO
+
+    custom_editor_status
+        ShowPlugs()
+        StatusConnections()
+        CheckEnv()
+        ViewHistoryGit()
+        Update(name)
+        LogPlugin()
+        ClearLogs()

@@ -5,8 +5,7 @@ M.DOC_LINKS = {
         ["GENERAL 7.5"] = "https://docshield.tungstenautomation.com/KTA/en_US/750-4kcae04o43/help/TA/TotalAgility_help/c_welcome.html",
         ["CaptureDocumentService"] = "https://docshield.tungstenautomation.com/KTA/en_US/8.1.0-rmx0b1ux3q/help/SDK_Documentation/latest/class_agility_1_1_sdk_1_1_services_1_1_capture_document_service.html#a135da9da7d3cae63b4e6df2da579eeba",
         ["General 8.1"] = "https://docshield.tungstenautomation.com/KTA/en_US/8.1.0-rmx0b1ux3q/help/TotalAgilityApps/TotalAgility_apps/c_TAappintro.html",
-        ["How force unlock things"] = "https://partner.kofax.com/s/case/500Pr00000QpjFXIAZ/exctration-group-locked",
-        ["PDF 8.1"] = "https://docshield.tungstenautomation.com/KTA/en_US/8.1.0-rmx0b1ux3q/print/TungstenTotalAgilityFeaturesGuide_EN.pdf?utm_source=chatgpt.com",
+        ["PDF 8.1"] = "https://docshield.tungstenautomation.com/KTA/en_US/8.1.0-rmx0b1ux3q/print/TungstenTotalAgilityFeaturesGuide_EN.pdf",
     },
     ["GIT"] = {
         ["GENERAL"] = "https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control",

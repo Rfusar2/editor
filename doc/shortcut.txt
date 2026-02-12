@@ -3,8 +3,6 @@
 
      # NVIM Basic
 
-     Leader + pu            | PackerUpdate
-     Leader + Leader + ps   | PackerSync
      Leader + so            | Execute current file.lua
      Leader + fh            | nvim's menu help
 
