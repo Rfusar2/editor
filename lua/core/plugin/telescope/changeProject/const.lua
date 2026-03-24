@@ -2,7 +2,7 @@ local M = {}
 
 local home = "C:/Users/nemes/Desktop/WORK"
 
-if my_global_vars.isWindows then
+if _G.my_global_vars.isWindows == true then
     M.projects = {
         ["Lessons"] = "C:/Users//Desktop/Lessons",
         

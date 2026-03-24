@@ -4,11 +4,13 @@ RF-custom-powershell	help_windows.txt	/*RF-custom-powershell*
 RF-custom_config_menu	shortcut.txt	/*RF-custom_config_menu*
 RF-custom_snippets	snippet.txt	/*RF-custom_snippets*
 RF-docs_csc.exe	help_windows.txt	/*RF-docs_csc.exe*
-RF-folders	lua.txt	/*RF-folders*
+RF-folders	mylua.txt	/*RF-folders*
 RF-gcloud	gcloud.txt	/*RF-gcloud*
+RF-global_vars	myvars.txt	/*RF-global_vars*
 RF-golang-mongoDB	golang.txt	/*RF-golang-mongoDB*
-RF-help_manual_custom_1	lua.txt	/*RF-help_manual_custom_1*
-RF-menu-nvim-custom	lua.txt	/*RF-menu-nvim-custom*
+RF-help_manual_custom_1	mylua.txt	/*RF-help_manual_custom_1*
+RF-kta-help	kta.txt	/*RF-kta-help*
+RF-menu-nvim-custom	mylua.txt	/*RF-menu-nvim-custom*
 RF-reset-Windows-license	help_windows.txt	/*RF-reset-Windows-license*
-RF-script_with_class	lua.txt	/*RF-script_with_class*
+RF-script_with_class	mylua.txt	/*RF-script_with_class*
 RF-special-char	specialChar.txt	/*RF-special-char*

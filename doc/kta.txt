@@ -1,0 +1,6 @@
+========================================================================
+*RF-kta-help*
+
+for using a kta variable on projec builder
+    pXDoc.ParentFolder.XValues.ItemByName("KTA.InputVariable.JOBID").Value
+

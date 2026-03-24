@@ -20,7 +20,6 @@
      Leader + s             | search a word into current directory
 
      Leader + Leader + t    | Display tasks
-     Leader + Leader + a    | Display notes
 
      Leader + 1             | colorschema
      Leader + 2             | terminal CMD
@@ -29,20 +28,6 @@
      Leader + 5             | git status
      Leader + 6             | git commits
      Leader + 7             | git braches
-
-     # Autocommand
-
-     :PushGithub
-     :h TagsXml (Not Available)
-     :CreateNextJs
-
-     -- Tool AI
-     :Domanda
-
-     -- Tool for translations
-     :InputTraduzione
-     :GeneraTraduzione
-
 
      # Menu
 

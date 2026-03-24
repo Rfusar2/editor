@@ -24,10 +24,12 @@ function M.MenuProject()
       actions.select_default:replace(function()
         local selection = action_state.get_selected_entry()
         actions.close(prompt_bufnr)
+        print(selection)
         
         if selection then
           local key = selection.value
           local path = C.projects[key]
+          print(path, selection.value)
           if path then
               if key:match("FUNC -") then 
 
@@ -64,4 +66,4 @@ end
 -- local opts = { noremap = true, silent = true }
 -- vim.keymap.set("", "<leader>ps", ":lua MenuProject()<CR>", opts)
 
-return M
+--return M
