@@ -35,18 +35,4 @@ end
 
 function MY_GLOBAL_VARS:log(obj) print(vim.inspect(obj)) end
 
-
-function MY_GLOBAL_VARS:studies(keymap)
-    if keymap == "text" then
-        MY_GLOBAL_VARS:open_url("https://10fastfingers.com/typing-test/italian")
-    else 
-        print([[
-keywords
-
-text:   open link for text workout
-
-        ]])
-    end
-end
-
 _G.my_global_vars = MY_GLOBAL_VARS:new()
